@@ -1,17 +1,17 @@
 # 打包临时目录
-RatRater/stage/
+stage/
 
 # 反编译中间分析产物（可用 tools 下脚本重新生成）
-RatRater/tools/out_*.txt
+tools/out_*.txt
 
 # 素材源图副本（compose.py 会自动重新复制）
-RatRater/store-assets/src/
+store-assets/src/
 
 # Python 缓存
 __pycache__/
 *.pyc
 
-# 本地工作记忆 / 敏感数据（两层排除：git 与 vsce）
+# 本地工作记忆 / 敏感数据
 .codebuddy/
 
 # 编辑器 / 系统
