@@ -81,7 +81,8 @@ public sealed class RatRaterTicker : MonoBehaviour
         }
         ButcherService.Tick();
 
-        if (Input.GetKeyDown(KeyCode.K))
+        bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+        if (ctrl && Input.GetKeyDown(KeyCode.K))
         {
             TryButcher();
         }
