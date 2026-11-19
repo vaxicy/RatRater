@@ -10,14 +10,14 @@ internal static class BladeBatchPatch
     internal static string Status = "not installed";
     private static bool _busy;
 
-    // 匹配原回调的第三个参数（被点老鼠）。
-    private static bool Prefix(GameItem __2)
+    // 原回调 b__99_4 签名 void(GameItem s, GameItem t)，t 是被点老鼠（Harmony __1）。
+    private static bool Prefix(GameItem __1)
     {
         if (_busy) return true;
         if (!RatRaterMod.BatchButcherEnabled) return true;
-        if (__2 == null || !GameBridge.IsRat(__2)) return true;
+        if (__1 == null || !GameBridge.IsRat(__1)) return true;
 
-        var inv = __2.parentInventory;
+        var inv = __1.parentInventory;
         if (inv == null) return true;
 
         var targets = new List<GameItem>();

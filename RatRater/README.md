@@ -42,7 +42,7 @@ No save edits, no sprite changes, no sensitive capabilities — activation won't
 
 The mod uses the game's **built-in native mod loader**. No MelonLoader, no prerequisites.
 
-1. Download `RatRater-1.6.0.zip` from [Releases](../../releases).
+1. Download `RatRater-1.6.1.zip` from [Releases](../../releases).
 2. Exit the game, unzip, and copy the whole `RatRater` folder into the game's `Mods` directory, e.g.:
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -63,7 +63,7 @@ To uninstall, close the game and delete the `Mods\RatRater` folder. Saves are un
 
 ## Troubleshooting
 
-This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.6.0.
+This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.6.1.
 
 If highlights or cull-rats-last don't work, search `Player.log` in your save directory for `[RatRater]`:
 
