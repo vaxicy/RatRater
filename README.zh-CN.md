@@ -18,9 +18,9 @@
 
 红色直接读游戏自己的状态标签，不再是自己编的公式。繁殖力也算：当前繁殖力低于 30%，或者基础繁殖力低于 50%，就标红。老年按「年龄 ≥ 14 × 寿命基因」算。基因跟游戏基准比：生长 1、窝仔 3、免疫 30、最大健康 100、寿命 1、饥饿 65（饥饿越低越好）。
 
-### 死老鼠置底
+### 红老鼠和死老鼠置底
 
-按 R 整理背包或仓库时，死老鼠挪到最后一格，活老鼠照常排在前面。
+按 R 整理背包或仓库时，标红（建议淘汰）的老鼠和死老鼠一起挪到最后，健康老鼠排在前面。这样一整理就能把该处理的集中框选拖走。
 
 跟多吉 R 键整理兼容：多吉走**游戏原生排序**时置底生效。如果它在 F4 面板里选了「智能排序」这类第三方方案，那套算法绕开了游戏排序器，置底就不生效——切回「原生 / Native」预设即可。
 
@@ -36,7 +36,7 @@
 
 模组走游戏**自带的原生加载器**，不用 MelonLoader，也没有额外前置。
 
-1. 到 [Releases](../../releases) 下载 `RatRater-1.3.0.zip`。
+1. 到 [Releases](../../releases) 下载 `RatRater-1.3.1.zip`。
 2. 退出游戏，解压，把整个 `RatRater` 文件夹复制到游戏的 `Mods` 目录，例如：
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -57,7 +57,7 @@
 
 ## 排查
 
-这个模组不用运行时反射，也不读写任意文件，manifest 里的 `Capabilities` 是空的，正常激活不会出「潜在危险」确认框。如果还弹，说明用的是旧版，升到 1.3.0 就好。
+这个模组不用运行时反射，也不读写任意文件，manifest 里的 `Capabilities` 是空的，正常激活不会出「潜在危险」确认框。如果还弹，说明用的是旧版，升到 1.3.1 就好。
 
 高亮或置底没生效时，去存档目录的 `Player.log` 里搜 `[RatRater]`：
 
@@ -81,7 +81,7 @@ tools/build.ps1        # 用 Roslyn 把 src/*.cs 编译成 build/RatRater.dll
 - `src/GameBridge.cs` —— 直接引用游戏 API（老鼠、界面元素、基因）
 - `src/Scorer.cs` —— 六项基因评分和淘汰判定
 - `src/HighlightRenderer.cs` —— 高亮渲染
-- `src/SortPatch.cs` —— Harmony patch 游戏排序器，实现死老鼠置底
+- `src/SortPatch.cs` —— Harmony patch 游戏排序器，把红老鼠和死老鼠排到最后
 - `src/RatRaterMod.cs` —— 模组入口、ticker、H 开关
 
 ## 许可

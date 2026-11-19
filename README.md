@@ -2,7 +2,7 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
-A native C# mod for **Probably Stolen** (Steam App 4348910, the "Deep Space Pawn Shop" game). Open a rat cage and instantly see which rats are worth culling — no hovering needed. Dead rats automatically sort to the end when you tidy an inventory. Uses the game's built-in mod loader; **MelonLoader is not required**.
+A native C# mod for **Probably Stolen** (Steam App 4348910, the "Deep Space Pawn Shop" game). Open a rat cage and instantly see which rats are worth culling — no hovering needed. When you tidy an inventory, rats marked for culling and dead rats sort to the end so you can drag them away in one go. Uses the game's built-in mod loader; **MelonLoader is not required**.
 
 ## Features
 
@@ -18,11 +18,11 @@ Each rat's grid cell gets a translucent color overlay. The rat sprite itself is 
 
 Red is driven by the game's own status flags, not a made-up formula. Fertility counts too: current fertility below 30% **or** base fertility below 50% turns a rat red. Old age means age ≥ 14 × the longevity gene. Genetics are scored against in-game baselines (growth 1, litter 3, immunity 30, max health 100, longevity 1, hunger 65 — lower hunger is better).
 
-### Dead Rats Last
+### Cull Rats Last
 
-When you press R to tidy a backpack or storage, dead rats move to the last slots while live rats stay in front.
+When you press R to tidy a backpack or storage, rats marked red (recommended for culling) and dead rats move to the last slots. Healthy rats stay in front, so you can select and drag the cull group in one motion.
 
-Works with the popular Duoji R-key sort: dead-rat-last applies when Duoji uses the **game's native sorting path**. If you pick a third-party mode such as "smart sort" in the F4 panel, that algorithm bypasses the game's comparator and the feature won't apply — switch back to the "Native" preset.
+Works with the popular Duoji R-key sort: this applies when Duoji uses the **game's native sorting path**. If you pick a third-party mode such as "smart sort" in the F4 panel, that algorithm bypasses the game's comparator and the feature won't apply — switch back to the "Native" preset.
 
 ### Hotkeys
 
@@ -36,7 +36,7 @@ Display and sorting only. No save edits, no sprite changes, no sensitive capabil
 
 The mod uses the game's **built-in native mod loader**. No MelonLoader, no prerequisites.
 
-1. Download `RatRater-1.3.0.zip` from [Releases](../../releases).
+1. Download `RatRater-1.3.1.zip` from [Releases](../../releases).
 2. Exit the game, unzip, and copy the whole `RatRater` folder into the game's `Mods` directory, e.g.:
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -57,9 +57,9 @@ To uninstall, close the game and delete the `Mods\RatRater` folder. Saves are un
 
 ## Troubleshooting
 
-This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.3.0.
+This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.3.1.
 
-If highlights or dead-rat-last don't work, search `Player.log` in your save directory for `[RatRater]`:
+If highlights or cull-rats-last don't work, search `Player.log` in your save directory for `[RatRater]`:
 
 - `sortPatch ok ...` — the sorting patch loaded; `comparator not found` means the game's comparator class name changed
 - `rats=N, cull=M` — the mod is scanning rats; if this line never appears, the game UI wasn't detected
@@ -81,7 +81,7 @@ tools/build.ps1        # compile src/*.cs into build/RatRater.dll with Roslyn
 - `src/GameBridge.cs` — direct references to game APIs (rats, elements, genetics)
 - `src/Scorer.cs` — six-trait scoring and cull decision
 - `src/HighlightRenderer.cs` — highlight overlay rendering
-- `src/SortPatch.cs` — Harmony patch on the game's sort comparator for dead-rat-last
+- `src/SortPatch.cs` — Harmony patch on the game's sort comparator to sink cull/dead rats
 - `src/RatRaterMod.cs` — mod entry, ticker, H toggle
 
 ## License

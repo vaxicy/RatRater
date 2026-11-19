@@ -3,8 +3,8 @@
   <ID>RatRater</ID>
   <Name>老鼠淘汰高亮 / Rat Rater</Name>
   <Author>RatRater</Author>
-  <ModVersion>1.3.0</ModVersion>
-  <Description>在鼠笼里直接高亮该淘汰的老鼠：红色=建议淘汰（挨饿/患病/朊病毒/抓痕/过度拥挤/免疫力低/老年/繁殖力低），蓝色=怀孕保护，绿色=优质留种。按 H 开关高亮。整理背包时死老鼠自动排到最后，兼容多吉 R 键整理（走游戏原生排序时生效）。不改动老鼠外观与存档，不申请文件或反射权限。</Description>
+  <ModVersion>1.3.1</ModVersion>
+  <Description>在鼠笼里直接高亮该淘汰的老鼠：红色=建议淘汰（挨饿/患病/朊病毒/抓痕/过度拥挤/免疫力低/老年/繁殖力低），蓝色=怀孕保护，绿色=优质留种。按 H 开关高亮。整理背包时红色老鼠和死老鼠一起排到最后，方便集中拖动，兼容多吉 R 键整理（走游戏原生排序时生效）。不改动老鼠外观与存档，不申请文件或反射权限。</Description>
   <GameVersions><Version>0.46D</Version></GameVersions>
   <Assemblies><Assembly>RatRater.dll</Assembly></Assemblies>
   <Capabilities/>
