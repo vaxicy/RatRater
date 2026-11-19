@@ -17,8 +17,10 @@ internal static class SortPatch
     private static bool IsRatMeat(GameItem item)
     {
         if (item == null || !item.IsTag(HusbandryHelper.MEAT_TYPE_TAG)) return false;
-        string sp = GameBridge.GetStringTag(item, HusbandryHelper.ANIMAL_SPECIES_TAG);
-        return sp != null && sp == HusbandryHelper.ANIMAL_RAT;
+        // 屠宰鼠产出的肉：CreateButcherCuts 把物种 id 写进 MEAT_TYPE_TAG。
+        string meatType = GameBridge.GetStringTag(item, HusbandryHelper.MEAT_TYPE_TAG);
+        return meatType != null && string.Equals(meatType, HusbandryHelper.ANIMAL_RAT,
+            System.StringComparison.OrdinalIgnoreCase);
     }
 
     private static int Tier(GameItem item)

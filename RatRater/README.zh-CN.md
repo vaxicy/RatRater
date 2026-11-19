@@ -42,7 +42,7 @@
 
 模组走游戏**自带的原生加载器**，不用 MelonLoader，也没有额外前置。
 
-1. 到 [Releases](../../releases) 下载 `RatRater-1.7.0.zip`。
+1. 到 [Releases](../../releases) 下载 `RatRater-1.7.1.zip`。
 2. 退出游戏，解压，把整个 `RatRater` 文件夹复制到游戏的 `Mods` 目录，例如：
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -63,7 +63,7 @@
 
 ## 排查
 
-这个模组不用运行时反射，也不读写任意文件，manifest 里的 `Capabilities` 是空的，正常激活不会出「潜在危险」确认框。如果还弹，说明用的是旧版，升到 1.7.0 就好。
+这个模组不用运行时反射，也不读写任意文件，manifest 里的 `Capabilities` 是空的，正常激活不会出「潜在危险」确认框。如果还弹，说明用的是旧版，升到 1.7.1 就好。
 
 高亮或置底没生效时，去存档目录的 `Player.log` 里搜 `[RatRater]`：
 
