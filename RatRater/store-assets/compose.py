@@ -34,7 +34,7 @@ def font(size, bold=False, cn=False):
 def load_caps():
     os.makedirs(SRC, exist_ok=True)
     # 优先用带怀孕蓝色的新截图
-    new_cap = os.path.join(ASSETS, "image.bf3e4b4889.png")
+    new_cap = os.path.join(ASSETS, "image.01b0bf5040.png")
     if os.path.exists(new_cap):
         caps = [Image.open(new_cap).convert("RGB")]
     else:
@@ -94,7 +94,7 @@ def compose_header(cap):
     SW, SH = 660, 300
     cw, ch = cap.size
     src_h = int(cw / (SW / SH))
-    src_y = max(0, min(ch - src_h, int(ch * 0.45)))
+    src_y = max(0, min(ch - src_h, int(ch * 0.25)))
     crop = cap.crop((0, src_y, cw, src_y + src_h)).resize((SW, SH), Image.LANCZOS)
     mask = Image.new("L", (SW, SH), 0)
     ImageDraw.Draw(mask).rounded_rectangle((0, 0, SW - 1, SH - 1), radius=10, fill=255)
@@ -124,10 +124,12 @@ T_EN = {
     "green": "Green = no status, good genetics",
     "hotkey": "H: toggle highlights",
     "tidy": "BLADE BATCH BUTCHER",
-    "tidy1": "Click any rat with a blade to butcher",
-    "tidy2": "all red and dead rats in that container.",
+    "tidy1": "Blade-click a rat to butcher all red/dead in that container",
+    "tidy2": "",
+    "meat": "SORT ORDER",
+    "meat1": "Healthy rats, then red/dead rats, then rat meat at the bottom",
     "install": "INSTALL",
-    "ins_items": ("Unzip, copy RatRater into the game's Mods folder", "Enable in Mods menu and restart"),
+    "ins_items": ("Unzip and copy RatRater into the game's Mods folder", "Enable in Mods menu and restart"),
     "foot": "Toggle in mod settings. Native loader, no MelonLoader.",
 }
 
@@ -142,8 +144,10 @@ T_ZH = {
     "green": "绿色 = 无负面状态，基因好",
     "hotkey": "H：开关高亮",
     "tidy": "用刀批量屠宰",
-    "tidy1": "拿剥皮刀点任意老鼠，同箱的红鼠",
-    "tidy2": "和死鼠一起变成肉，留在原箱。",
+    "tidy1": "拿剥皮刀点老鼠，同箱红鼠和死鼠一起变肉",
+    "tidy2": "",
+    "meat": "整理排序",
+    "meat1": "健康鼠 → 红鼠/死鼠 → 鼠肉（最底）",
     "install": "安装",
     "ins_items": ("解压，把 RatRater 文件夹放进游戏 Mods 目录", "在模组菜单启用并重启"),
     "foot": "模组设置里可开关。游戏原生加载器，无需 MelonLoader。",
@@ -192,8 +196,9 @@ def compose_gallery(cap1, lang, t, outname):
     text_fit(d, px + 30, y, t["green"], 18, inner, MUTED, cn=cn); y += 34
     text_fit(d, px + 30, y, t["hotkey"], 18, inner, MUTED, cn=cn); y += 58
     text_fit(d, px + 30, y, t["tidy"], 24, inner, WHITE, bold=True, cn=cn); y += 44
-    text_fit(d, px + 30, y, t["tidy1"], 17, inner, MUTED, cn=cn); y += 30
-    text_fit(d, px + 30, y, t["tidy2"], 17, inner, MUTED, cn=cn); y += 64
+    text_fit(d, px + 30, y, t["tidy1"], 17, inner, MUTED, cn=cn); y += 58
+    text_fit(d, px + 30, y, t["meat"], 24, inner, WHITE, bold=True, cn=cn); y += 44
+    text_fit(d, px + 30, y, t["meat1"], 17, inner, MUTED, cn=cn); y += 58
     text_fit(d, px + 30, y, t["install"], 24, inner, WHITE, bold=True, cn=cn); y += 44
     for line in t["ins_items"]:
         text_fit(d, px + 46, y, "- " + line, 17, inner - 16, WHITE, cn=cn); y += 34
