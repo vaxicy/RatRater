@@ -1,0 +1,11 @@
+﻿=== TYPE: BuyerHighlight.ModEntry
+METHOD: Init
+  call         token(0x06000059) ; <tok 100663385>
+  ldarg.0      
+  ldarg.1      
+  ldfld        token(0x0A0000B0) ; <tok 167772336>
+  call         token(0x0A0000B1) ; <tok 167772337>
+  newobj       token(0x06000023) ; <tok 100663331>
+  stfld        token(0x04000064) ; <tok 67108964>
+  ret          
+

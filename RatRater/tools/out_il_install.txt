@@ -1,0 +1,56 @@
+﻿=== TYPE: RatGeneticAlwaysImprove.HusbandryDayAdvance
+METHOD: Install
+  ldsfld       token(0x04000003) ; _installed
+  brfalse.s    8316
+  ret          
+  call         token(0x06000033) ; EnsureInitialized
+  ldsfld       token(0x04000027) ; <0>__OnGameLoaded
+  dup          
+  brtrue.s     8348
+  pop          
+  ldnull       
+  ldftn        token(0x06000011) ; OnGameLoaded
+  newobj       token(0x0A00000F) ; .ctor
+  dup          
+  stsfld       token(0x04000027) ; <0>__OnGameLoaded
+  call         token(0x0A000010) ; add_OnGameLoadedNormal
+  ldsfld       token(0x04000028) ; <1>__OnGoingSleep
+  dup          
+  brtrue.s     8380
+  pop          
+  ldnull       
+  ldftn        token(0x06000012) ; OnGoingSleep
+  newobj       token(0x0A00000F) ; .ctor
+  dup          
+  stsfld       token(0x04000028) ; <1>__OnGoingSleep
+  call         token(0x0A000011) ; add_OnGoingSleepEarly
+  ldsfld       token(0x04000029) ; <2>__OnWakingUp
+  dup          
+  brtrue.s     8412
+  pop          
+  ldnull       
+  ldftn        token(0x06000013) ; OnWakingUp
+  newobj       token(0x0A00000F) ; .ctor
+  dup          
+  stsfld       token(0x04000029) ; <2>__OnWakingUp
+  call         token(0x0A000012) ; add_OnWakingUpEarly
+  call         token(0x0600000F) ; CreateTicker
+  call         token(0x06000010) ; RegisterHotkeyOptions
+  ldc.i4.1     
+  stsfld       token(0x04000003) ; _installed
+  ldstr        string token(0x70000001) ; <tok 1879048193>
+  call         token(0x0600002D) ; get_RatHotkey
+  stloc.0      
+  ldloca.s     local(0x0000)
+  constrained. token(0x01000012) ; UnityEngine.KeyCode
+  callvirt     token(0x0A000013) ; ToString
+  ldstr        string token(0x70000019) ; <tok 1879048217>
+  call         token(0x0600002E) ; get_FishHotkey
+  stloc.0      
+  ldloca.s     local(0x0000)
+  constrained. token(0x01000012) ; UnityEngine.KeyCode
+  callvirt     token(0x0A000013) ; ToString
+  call         token(0x0A000014) ; Concat
+  call         token(0x06000014) ; LogMsg
+  ret          
+

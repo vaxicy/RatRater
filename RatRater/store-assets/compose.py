@@ -33,14 +33,17 @@ def font(size, bold=False, cn=False):
 
 def load_caps():
     os.makedirs(SRC, exist_ok=True)
-    files = sorted(glob.glob(os.path.join(ASSETS, "屏幕截图*.png")))
-    if len(files) < 2:
-        raise SystemExit("need 2 screenshots, found %d" % len(files))
-    caps = []
-    for i, f in enumerate(files[:2]):
-        im = Image.open(f).convert("RGB")
+    # 优先用带怀孕蓝色的新截图
+    new_cap = os.path.join(ASSETS, "image.1b24d5d632.png")
+    if os.path.exists(new_cap):
+        caps = [Image.open(new_cap).convert("RGB")]
+    else:
+        files = sorted(glob.glob(os.path.join(ASSETS, "屏幕截图*.png")))
+        if len(files) < 1:
+            raise SystemExit("no screenshots found")
+        caps = [Image.open(f).convert("RGB") for f in files[:2]]
+    for i, im in enumerate(caps):
         im.save(os.path.join(SRC, "cap%d.png" % (i + 1)))
-        caps.append(im)
     return caps
 
 
@@ -206,9 +209,10 @@ def compose_gallery(cap1, lang, t, outname):
 
 def main():
     caps = load_caps()
-    compose_header(caps[1])
-    compose_gallery(caps[0], "en", T_EN, "gallery-1.png")
-    compose_gallery(caps[0], "zh", T_ZH, "gallery-2-zh.png")
+    cap = caps[-1]
+    compose_header(cap)
+    compose_gallery(cap, "en", T_EN, "gallery-1.png")
+    compose_gallery(cap, "zh", T_ZH, "gallery-2-zh.png")
 
 
 if __name__ == "__main__":

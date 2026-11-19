@@ -1,0 +1,28 @@
+﻿=== FILE: D:\Probably Stolen\Probably Stolen_Data\Managed\Assembly-CSharp.dll
+typedefs: 2742
+
+TYPE: .InventorySortHelper
+    FIELD: undoSnapshots
+    METHOD: IsAnchored
+    METHOD: MaySort
+    METHOD: CanSort
+    METHOD: Sort
+    METHOD: MayUndo
+    METHOD: CanUndo
+    METHOD: Undo
+    METHOD: ComputeUndo
+    METHOD: NewOccupancy
+    METHOD: Commit
+    METHOD: PackShelves
+    METHOD: ScanRow
+    METHOD: PackFirstFit
+    METHOD: ScanAll
+    METHOD: Fits
+    METHOD: Orientations
+    METHOD: WideOrientation
+    METHOD: OrientedHeight
+    METHOD: FitsOccupancy
+    METHOD: MarkOccupied
+    METHOD: CellCount
+    METHOD: .cctor
+
