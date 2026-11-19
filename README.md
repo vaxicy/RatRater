@@ -30,15 +30,14 @@ Enhance **Probably Stolen** (Deep Space Pawn Shop) with at-a-glance rat culling 
 |---|---|
 | `H` | 开关全部高亮（默认开） |
 | `[` / `]` | 调低 / 调高淘汰阈值（默认 0.50，越低越少老鼠被判淘汰） |
-| `F11` | 导出鼠群清单 CSV 到存档目录的 `RatRater` 文件夹 |
 
-只改显示与排序，不写存档、不改老鼠外观。
+只改显示与排序，不写存档、不改老鼠外观、不申请文件或反射等敏感权限——激活时不会弹「潜在危险」提示。
 
 ## 安装
 
 本模组使用游戏**自带的原生模组加载器**，不需要 MelonLoader，也不用额外前置。
 
-1. 从 [Releases](../../releases) 下载 `RatRater-1.1.0.zip`。
+1. 从 [Releases](../../releases) 下载 `RatRater-1.2.0.zip`。
 2. 退出游戏，解压，把 `RatRater` 文件夹整个复制到游戏的 `Mods` 目录，例如：
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -55,11 +54,11 @@ Enhance **Probably Stolen** (Deep Space Pawn Shop) with at-a-glance rat culling 
 
 - 游戏：Probably Stolen 正式版（Steam，.VERSION 100-Rev12 / 清单标注 0.46D）
 - 加载方式：游戏原生模组加载器（带 `manifest.xml` 的 C# DLL）
-- 已声明能力：`reflection-external`（读游戏类型/字段）、`files`（F11 导出 CSV）
+- 无敏感能力声明：不使用运行时反射、不读写任意文件
 
 ## 排查
 
-游戏模组菜单若提示「使用了清单文件中未声明的权限」，说明 manifest 缺少 `Capabilities` 声明——本项目已声明 `reflection-external` 和 `files`，请确认使用的是最新版。
+本项目不使用运行时反射、不读写任意文件，manifest 的 `Capabilities` 为空，激活时不应出现「潜在危险」确认框。若仍出现，说明用的是旧版（1.1.0 及以前），请更新到 1.2.0。
 
 高亮或置底没生效时，在存档目录的 `Player.log` 搜 `[RatRater]`：
 
@@ -83,13 +82,13 @@ tools/build.ps1        # 用 Roslyn 编译 src/*.cs 到 build/RatRater.dll
 - `src/Scorer.cs`：六项基因评分与淘汰判定
 - `src/HighlightRenderer.cs`：高亮渲染
 - `src/SortPatch.cs`：Harmony patch 游戏排序器，死老鼠置底
-- `src/RatRaterMod.cs`：模组入口、ticker、H/F11 快捷键、CSV 导出
+- `src/RatRaterMod.cs`：模组入口、ticker、H 开关与阈值快捷键
 
 ## English
 
-**RatRater** is a native C# mod for **Probably Stolen** (Steam App 4348910, the "Deep Space Pawn Shop" game). It highlights rats worth culling directly in the cage grid — no hovering needed — and sorts dead rats to the end when you tidy an inventory. Red = cull, blue = pregnant (protected), green = keep. Press `H` to toggle highlights, `[` / `]` to adjust the cull threshold, `F11` to export a colony CSV. Sorting patch works with the popular Duoji R-key sort when it uses the game's native sorting path. Uses the game's built-in mod loader; **MelonLoader is not required**.
+**RatRater** is a native C# mod for **Probably Stolen** (Steam App 4348910, the "Deep Space Pawn Shop" game). It highlights rats worth culling directly in the cage grid — no hovering needed — and sorts dead rats to the end when you tidy an inventory. Red = cull, blue = pregnant (protected), green = keep. Press `H` to toggle highlights, `[` / `]` to adjust the cull threshold. Sorting patch works with the popular Duoji R-key sort when it uses the game's native sorting path. Uses the game's built-in mod loader; **MelonLoader is not required**. No runtime reflection or file access, so no dangerous-capability warning on activation.
 
-Install: unzip `RatRater-1.1.0.zip`, copy the `RatRater` folder into the game's `Mods` directory, enable it in the in-game Mods menu, then restart.
+Install: unzip `RatRater-1.2.0.zip`, copy the `RatRater` folder into the game's `Mods` directory, enable it in the in-game Mods menu, then restart.
 
 ## 许可
 

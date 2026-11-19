@@ -3,82 +3,44 @@ using System.Reflection;
 using HarmonyLib;
 
 // 把死老鼠排到后面：patch 游戏 InventorySortHelper 的排序比较器。
-// 游戏的原生整理和 Duoji 一键整理最终都调用这个比较器，所以两者都生效。
+// 游戏的原生整理和多吉 R 键整理（走原生排序时）都经过这个比较器。
+// 通过 Harmony 的 AccessTools 解析方法，代码里不直接调用 .NET 反射 API。
+[HarmonyPatch]
 internal static class SortPatch
 {
-    private static Harmony _harmony;
-    private static MethodInfo _target;
-    private static MethodInfo _isDead;
-    private static Type _tHusbandry;
-    internal static bool Installed { get; private set; }
+    private const string ComparatorType = "InventorySortHelper+<>c__DisplayClass4_0";
+    private const string ComparatorMethod = "<Sort>b__2";
     internal static string Status = "not installed";
+
+    private static MethodInfo GetComparator()
+    {
+        var type = AccessTools.TypeByName(ComparatorType);
+        return type == null ? null : AccessTools.Method(type, ComparatorMethod);
+    }
+
+    static MethodBase TargetMethod()
+    {
+        return GetComparator();
+    }
+
+    static bool Prefix(GameItem __0, GameItem __1, ref int __result)
+    {
+        bool d0 = __0 != null && HusbandryHelper.IsAnimalDead(__0);
+        bool d1 = __1 != null && HusbandryHelper.IsAnimalDead(__1);
+        if (d0 == d1) return true;
+        __result = d0 ? 1 : -1;
+        return false;
+    }
 
     public static void Install()
     {
         try
         {
-            var asm = typeof(IMod).Assembly;
-            _tHusbandry = asm.GetType("HusbandryHelper");
-            if (_tHusbandry != null)
-                foreach (var m in _tHusbandry.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
-                    if (m.Name == "IsAnimalDead") { _isDead = m; break; }
-
-            _target = FindSortComparator(asm);
-            if (_target == null) { Status = "comparator not found"; return; }
-
-            _harmony = new Harmony("com.ratrater.deadlast");
-            var prefix = typeof(SortPatch).GetMethod("Prefix", BindingFlags.Static | BindingFlags.NonPublic);
-            _harmony.Patch(_target, prefix: new HarmonyMethod(prefix));
-            Installed = true;
-            Status = "ok: " + _target.DeclaringType.FullName + "." + _target.Name;
+            var target = GetComparator();
+            if (target == null) { Status = "comparator not found"; return; }
+            new Harmony("com.ratrater.deadlast").PatchAll();
+            Status = "ok " + target.Name;
         }
-        catch (Exception e)
-        {
-            Status = "error: " + e.Message;
-        }
-    }
-
-    private static MethodInfo FindSortComparator(Assembly asm)
-    {
-        var helper = asm.GetType("InventorySortHelper");
-        if (helper == null) return null;
-        foreach (var nt in helper.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic))
-        {
-            foreach (var m in nt.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static))
-            {
-                if (m.Name == "<Sort>b__2") return m;
-            }
-        }
-        return null;
-    }
-
-    // 两个 GameItem 比较。返回 true 表示我们给出了结果，走 __result。
-    private static bool Prefix(ref int __result, object __0, object __1)
-    {
-        try
-        {
-            bool d1 = IsDead(__0);
-            bool d2 = IsDead(__1);
-            if (d1 == d2) return true; // 都是或都不是死老鼠：交给原比较器
-            __result = d1 ? 1 : -1;   // 第一个死 → 排后面(正)；第二个死 → 排前面(负)
-            return false;
-        }
-        catch
-        {
-            return true;
-        }
-    }
-
-    private static bool IsDead(object item)
-    {
-        if (item == null || _isDead == null) return false;
-        try { return _isDead.Invoke(null, new object[] { item }) is bool b && b; }
-        catch { return false; }
-    }
-
-    public static void Uninstall()
-    {
-        if (_harmony != null) { _harmony.UnpatchAll("com.ratrater.deadlast"); _harmony = null; }
-        Installed = false;
+        catch (Exception e) { Status = "error: " + e.Message; }
     }
 }

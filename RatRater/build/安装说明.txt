@@ -1,9 +1,9 @@
-RatRater 老鼠淘汰高亮 1.1.0
+RatRater 老鼠淘汰高亮 1.2.0
 ================================
 
 安装
 1. 退出游戏。
-2. 把整个 build 文件夹里的两个文件（manifest.xml、RatRater.dll）放到一个新文件夹 RatRater，
+2. 把 manifest.xml 和 RatRater.dll 放到一个新文件夹 RatRater，
    然后把这个 RatRater 文件夹复制到：
    D:\Probably Stolen\Mods\
    最终结构：D:\Probably Stolen\Mods\RatRater\manifest.xml 和 RatRater.dll
@@ -16,7 +16,6 @@ RatRater 老鼠淘汰高亮 1.1.0
 - 绿色底色 = 优质留种
 - H 键：开关全部高亮（默认开）
 - [ / ] 键：调低 / 调高淘汰阈值（默认 0.50，越低越少老鼠被判淘汰）
-- F11：导出鼠群清单 CSV 到存档目录的 RatRater 文件夹
 
 死老鼠置底
 - 整理背包 / 仓库时，死老鼠自动排到最后一格，活老鼠照常在前。
@@ -26,11 +25,11 @@ RatRater 老鼠淘汰高亮 1.1.0
 
 说明
 - 只在老鼠所在格子上盖一层半透明底色，老鼠图案、存档都不改。
+- 不需要 MelonLoader，用游戏自带原生模组加载器。
+- 不申请文件读写、反射等敏感权限，激活时不会弹「潜在危险」提示。
 - 卸载：关闭游戏，删掉 Mods\RatRater 文件夹即可，存档不受影响。
 
 排查
-- 如果高亮没出现：存档目录 Player.log 里搜 [RatRater]，看 api 那行。
-  store=True getAll=True isTag=True getTag=True traits=True 才表示接口全部命中。
-  有 False 的项说明游戏版本接口名不同，把日志发回即可修。
-- 死老鼠置底没生效：搜 `sortPatch`，正常应为 `sortPatch ok: ...<Sort>b__2`。
-  若是 `comparator not found`，把日志发我，我按实际嵌套类名调整。
+- 高亮没出现：存档目录 Player.log 搜 [RatRater]，看有没有报错。
+- 死老鼠置底没生效：搜 `sortPatch`，正常应为 `sortPatch ok: ...`。
+  若是 `comparator not found`，把日志发回，按实际嵌套类名调整。

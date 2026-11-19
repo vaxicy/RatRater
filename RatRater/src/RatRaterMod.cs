@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using UnityEngine;
 
 public sealed class RatRaterMod : IMod
@@ -23,12 +19,7 @@ public sealed class RatRaterMod : IMod
 
     public void Init(ModManifest manifest)
     {
-        try
-        {
-            _log = (ModLog)Activator.CreateInstance(typeof(ModLog),
-                manifest != null ? manifest.ID : "RatRater");
-        }
-        catch { _log = null; }
+        _log = new ModLog(manifest);
         Log("init");
     }
 
@@ -42,7 +33,6 @@ public sealed class RatRaterMod : IMod
     public void OnDisable()
     {
         Enabled = false;
-        SortPatch.Uninstall();
         if (_tickerComp != null) _tickerComp.Clear();
         if (_ticker != null) UnityEngine.Object.Destroy(_ticker);
         _ticker = null;
@@ -54,44 +44,20 @@ public sealed class RatRaterMod : IMod
     private void Install()
     {
         if (_installed) return;
-        if (!GameBridge.Init())
-        {
-            Log("GameBridge not ready, retry on tick");
-        }
-        Scorer.Init(typeof(IMod).Assembly.GetType("HusbandryHelper"));
-
-        try
-        {
-            var hook = typeof(IMod).Assembly.GetType("ModHook");
-            var ev = hook.GetEvent("OnGameLoadedNormal",
-                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
-            if (ev != null)
-            {
-                var handler = Delegate.CreateDelegate(ev.EventHandlerType, null,
-                    typeof(RatRaterMod).GetMethod("OnGameLoaded",
-                        BindingFlags.NonPublic | BindingFlags.Static));
-                ev.AddEventHandler(null, handler);
-            }
-        }
-        catch (Exception e) { Log("hook error: " + e.Message); }
+        GameBridge.Init();
+        ModHook.OnGameLoadedNormal += OnGameLoaded;
 
         SortPatch.Install();
         Log("sortPatch " + SortPatch.Status);
 
-        try
-        {
-            _ticker = new GameObject("RatRaterTicker");
-            _tickerComp = _ticker.AddComponent<RatRaterTicker>();
-            UnityEngine.Object.DontDestroyOnLoad(_ticker);
-        }
-        catch (Exception e) { Log("ticker error: " + e.Message); }
-
+        _ticker = new GameObject("RatRaterTicker");
+        _tickerComp = _ticker.AddComponent<RatRaterTicker>();
+        UnityEngine.Object.DontDestroyOnLoad(_ticker);
         _installed = true;
     }
 
     private static void OnGameLoaded()
     {
-        GameBridge.Init();
         Log("game loaded");
     }
 }
@@ -102,7 +68,6 @@ public sealed class RatRaterTicker : MonoBehaviour
     private float _next;
     private bool _shown = true;
     private int _lastCount = -1;
-    private bool _loggedApi;
 
     private void Update()
     {
@@ -113,10 +78,6 @@ public sealed class RatRaterTicker : MonoBehaviour
             _shown = !_shown;
             if (!_shown) _renderer.Clear();
             RatRaterMod.Log("highlight " + (_shown ? "on" : "off"));
-        }
-        if (Input.GetKeyDown(KeyCode.F11))
-        {
-            Export();
         }
         if (Input.GetKeyDown(KeyCode.LeftBracket) || Input.GetKeyDown(KeyCode.RightBracket))
         {
@@ -130,76 +91,27 @@ public sealed class RatRaterTicker : MonoBehaviour
         if (Time.unscaledTime < _next) return;
         _next = Time.unscaledTime + 0.4f;
 
-        if (!GameBridge.Ready) GameBridge.Init();
-        if (!_loggedApi)
-        {
-            _loggedApi = true;
-            RatRaterMod.Log("api " + GameBridge.Diagnostics());
-        }
-        var elements = GameBridge.GetAllElements();
-        if (elements == null) return;
-
         var scores = new List<RatScore>();
         float hungerSum = 0f; int hungerN = 0;
-        foreach (var el in (IEnumerable)elements)
+        foreach (var item in GameBridge.GetAllElements())
         {
-            var item = GameBridge.GetItem(el);
             if (item == null || !GameBridge.IsRat(item) || GameBridge.IsDead(item)) continue;
-            float h = GameBridge.GetFloatTag(item, Scorer.GetTagName("ANIMAL_HUNGER_RATE_TAG"));
+            float h = GameBridge.GetFloatTag(item, HusbandryHelper.ANIMAL_HUNGER_RATE_TAG);
             if (h > 0) { hungerSum += h; hungerN++; }
             var s = Scorer.Score(item, hungerN > 0 ? hungerSum / hungerN : 65f);
-            s.Element = el;
-            scores.Add(s);
+            s.Element = GameBridge.AsElement(item);
+            if (s.Element != null) scores.Add(s);
         }
 
         _renderer.Apply(scores, RatRaterMod.ShowKeep);
         if (scores.Count != _lastCount)
         {
             _lastCount = scores.Count;
-            RatRaterMod.Log("rats=" + scores.Count + ", cull=" + CountCull(scores));
+            int cull = 0;
+            foreach (var s in scores) if (s.Cull) cull++;
+            RatRaterMod.Log("rats=" + scores.Count + ", cull=" + cull);
         }
-    }
-
-    private static int CountCull(List<RatScore> scores)
-    {
-        int n = 0;
-        foreach (var s in scores) if (s.Cull) n++;
-        return n;
     }
 
     public void Clear() { _renderer.Clear(); }
-
-    private void Export()
-    {
-        try
-        {
-            var scores = new List<RatScore>();
-            var elements = GameBridge.GetAllElements();
-            if (elements == null) return;
-            foreach (var el in (IEnumerable)elements)
-            {
-                var item = GameBridge.GetItem(el);
-                if (item == null || !GameBridge.IsRat(item)) continue;
-                scores.Add(Scorer.Score(item, 65f));
-            }
-            string dir = Path.Combine(Application.persistentDataPath, "RatRater");
-            System.IO.Directory.CreateDirectory(dir);
-            string path = Path.Combine(dir, "rats_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".csv");
-            using (var w = new StreamWriter(path, false, System.Text.Encoding.UTF8))
-            {
-                w.WriteLine("cull,reason,pregnant,sex,age,score,genes");
-                foreach (var s in scores)
-                {
-                    string genes = "";
-                    foreach (var g in s.Genes) genes += g.Key + "=" + g.Value.ToString("F2") + " ";
-                    w.WriteLine(string.Join(",",
-                        s.Cull ? "1" : "0", s.Reason, s.Pregnant ? "1" : "0",
-                        s.Female ? "F" : "M", s.Age.ToString("F1"),
-                        s.Total.ToString("F3"), "\"" + genes.Trim() + "\""));
-                }
-            }
-            RatRaterMod.Log("exported " + path);
-        }
-        catch (Exception e) { RatRaterMod.Log("export error: " + e.Message); }
-    }
 }

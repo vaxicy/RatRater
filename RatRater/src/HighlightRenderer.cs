@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 internal sealed class HighlightRenderer
 {
-    private readonly Dictionary<object, GameObject> _marks = new Dictionary<object, GameObject>();
+    private readonly Dictionary<GameItemElement, GameObject> _marks = new Dictionary<GameItemElement, GameObject>();
     private static readonly Color CullColor = new Color(1f, 0.15f, 0.15f, 0.42f);
     private static readonly Color KeepColor = new Color(0.15f, 0.85f, 0.3f, 0.30f);
     private static readonly Color PregColor = new Color(0.2f, 0.55f, 1f, 0.32f);
 
     public void Apply(List<RatScore> scores, bool showKeep)
     {
-        var seen = new HashSet<object>();
+        var seen = new HashSet<GameItemElement>();
         foreach (var s in scores)
         {
             if (s.Element == null) continue;
@@ -43,16 +43,16 @@ internal sealed class HighlightRenderer
         }
 
         // 清理已消失元素的标记。
-        var stale = new List<object>();
+        var stale = new List<GameItemElement>();
         foreach (var kv in _marks) if (!seen.Contains(kv.Key)) stale.Add(kv.Key);
         foreach (var k in stale) Remove(k);
     }
 
-    private GameObject Create(object element)
+    private GameObject Create(GameItemElement element)
     {
         try
         {
-            var rt = GameBridge.GetRectTransform(element) as RectTransform;
+            var rt = GameBridge.GetRectTransform(element);
             if (rt == null) return null;
             var go = new GameObject("RatRaterMark", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(rt, false);
@@ -74,7 +74,7 @@ internal sealed class HighlightRenderer
         }
     }
 
-    private void Remove(object element)
+    private void Remove(GameItemElement element)
     {
         GameObject go;
         if (_marks.TryGetValue(element, out go))
