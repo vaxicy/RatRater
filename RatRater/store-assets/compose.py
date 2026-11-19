@@ -84,32 +84,31 @@ def save(im, name):
 
 
 def compose_header(cap):
+    # Nexus 推荐 1300x372，铺满不留白边
     W, H = 1300, 372
-    M = 40
-    RIGHT = W - M
     im = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(im)
-    d.rounded_rectangle((0, 0, 8, H), fill=RED)
+    d.rectangle((0, 0, 7, H - 1), fill=RED)
 
-    SW, SH = 660, 300
+    # 右侧截图占约 68% 宽，几乎贴右边
+    SW = 880
+    SH = H
     cw, ch = cap.size
     src_h = int(cw / (SW / SH))
-    src_y = max(0, min(ch - src_h, int(ch * 0.25)))
+    src_h = min(src_h, ch)
+    src_y = max(0, min(ch - src_h, int(ch * 0.18)))
     crop = cap.crop((0, src_y, cw, src_y + src_h)).resize((SW, SH), Image.LANCZOS)
-    mask = Image.new("L", (SW, SH), 0)
-    ImageDraw.Draw(mask).rounded_rectangle((0, 0, SW - 1, SH - 1), radius=10, fill=255)
-    sx, sy = RIGHT - SW, 36
-    im.paste(crop, (sx, sy), mask)
-    d = ImageDraw.Draw(im)
-    d.rounded_rectangle((sx, sy, sx + SW - 1, sy + SH - 1), radius=10, outline=BORDER, width=2)
-
-    tx = M + 12
-    d.text((tx, 66), "RatRater", font=font(64, True), fill=WHITE)
-    d.text((tx + 2, 150), "CULLING HIGHLIGHTER", font=font(22, True), fill=(186, 198, 214))
-    text_fit(d, tx + 2, 184, "Probably Stolen  /  native mod  /  no MelonLoader", 15, sx - tx - 30, DIM)
-    legend(d, tx + 2, 232, 26, 16, ("KEEP", "CULL", "PREGNANT"))
-    d.text((tx + 2, 282), "See which rats to cull at a glance", font=font(16), fill=MUTED)
-    assert tx + 540 < sx, "text overlaps screenshot"
+    sx = W - SW
+    im.paste(crop, (sx, 0))
+    d.rectangle((sx - 2, 0, sx, H - 1), fill=BORDER)  # 分隔线
+    tx = 40
+    d.text((tx, 62), "RatRater", font=font(62, True), fill=WHITE)
+    d.text((tx + 2, 140), "CULLING HIGHLIGHTER", font=font(21, True), fill=(190, 202, 218))
+    text_fit(d, tx + 2, 174, "Probably Stolen  /  native mod  /  no MelonLoader", 14, sx - tx - 40, DIM)
+    legend(d, tx + 2, 220, 24, 17, ("KEEP", "CULL", "PREGNANT"))
+    d.text((tx + 2, 266), "See which rats to cull at a glance", font=font(16), fill=MUTED)
+    d.text((tx + 2, 300), "Blade-click to butcher  /  rat meat sorts to bottom", font=font(15), fill=(150, 162, 180))
+    assert tx + 350 < sx, "text overlaps screenshot"
     save(im, "header.png")
 
 
