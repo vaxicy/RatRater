@@ -3,9 +3,16 @@ using UnityEngine;
 
 public sealed class RatRaterMod : IMod
 {
+    public const string BatchKey = "RatRater.BatchButcher";
     public static float Threshold = 0.5f;
     public static bool Enabled = true;
     public static bool ShowKeep = true;
+
+    public static bool BatchButcherEnabled
+    {
+        get { return PlayerPrefs.GetInt(BatchKey, 1) == 1; }
+        set { PlayerPrefs.SetInt(BatchKey, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
     private static ModLog _log;
     private static GameObject _ticker;
     private static bool _installed;
@@ -33,6 +40,7 @@ public sealed class RatRaterMod : IMod
     public void OnDisable()
     {
         Enabled = false;
+        BladeBatchPatch.Uninstall();
         if (_tickerComp != null) _tickerComp.Clear();
         if (_ticker != null) UnityEngine.Object.Destroy(_ticker);
         _ticker = null;
@@ -49,6 +57,17 @@ public sealed class RatRaterMod : IMod
 
         SortPatch.Install();
         Log("sortPatch " + SortPatch.Status);
+        BladeBatchPatch.Install();
+        Log("bladeBatch " + BladeBatchPatch.Status);
+
+        try
+        {
+            ModHelper.AddGameOptionSection("ratrater.section", "Rat Rater", () => "Rat highlighting and butchering");
+            ModHelper.AddGameOptionToggle("ratrater.batch", "ratrater.section", "Batch Butcher",
+                () => "Using a blade on a rat butchers all red/dead rats in that container",
+                () => BatchButcherEnabled, v => BatchButcherEnabled = v, () => "Gameplay");
+        }
+        catch (System.Exception e) { Log("options error: " + e.Message); }
 
         _ticker = new GameObject("RatRaterTicker");
         _tickerComp = _ticker.AddComponent<RatRaterTicker>();
@@ -81,13 +100,6 @@ public sealed class RatRaterTicker : MonoBehaviour
         }
         ButcherService.Tick();
 
-        bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            RatRaterMod.Log("K hit, ctrl=" + ctrl);
-            if (ctrl) TryButcher();
-        }
-
         if (!_shown) return;
         if (Time.unscaledTime < _next) return;
         _next = Time.unscaledTime + 0.4f;
@@ -114,32 +126,6 @@ public sealed class RatRaterTicker : MonoBehaviour
             foreach (var s in scores) if (s.Cull) cull++;
             RatRaterMod.Log("rats=" + scores.Count + ", cull=" + cull);
         }
-    }
-
-    private static void TryButcher()
-    {
-        if (!ButcherService.HasBlade())
-        {
-            RatRaterMod.Log("butcher: no blade found");
-            return;
-        }
-        var inv = ButcherService.CurrentInventory();
-        if (inv == null)
-        {
-            RatRaterMod.Log("butcher: point at a container first");
-            return;
-        }
-        int total;
-        var targets = ButcherService.CollectTargets(inv, out total);
-        if (targets.Count == 0)
-        {
-            RatRaterMod.Log("butcher: no cull/dead rats here");
-            return;
-        }
-        if (ButcherService.SkipConfirm)
-            ButcherService.RunButcher(inv, targets);
-        else
-            ButcherService.AskConfirm(inv, targets, total);
     }
 
     public void Clear() { _renderer.Clear(); }

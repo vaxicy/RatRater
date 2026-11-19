@@ -122,13 +122,13 @@ T_EN = {
                   "Low immunity / old age", "Low fertility (<30% or <50% base)"),
     "blue": "Blue = pregnant, always protected",
     "green": "Green = no status, good genetics",
-    "hotkey": "H: toggle highlights   Ctrl+K: butcher",
-    "tidy": "ONE-KEY BUTCHER  [Ctrl+K]",
-    "tidy1": "Point at a container, Ctrl+K, confirm.",
-    "tidy2": "Red and dead rats become meat in place.",
+    "hotkey": "H: toggle highlights",
+    "tidy": "BLADE BATCH BUTCHER",
+    "tidy1": "Click any rat with a blade to butcher",
+    "tidy2": "all red and dead rats in that container.",
     "install": "INSTALL",
     "ins_items": ("Unzip, copy RatRater into the game's Mods folder", "Enable in Mods menu and restart"),
-    "foot": "Butcher needs a blade. Native loader, no MelonLoader.",
+    "foot": "Toggle in mod settings. Native loader, no MelonLoader.",
 }
 
 T_ZH = {
@@ -140,13 +140,13 @@ T_ZH = {
                   "免疫力低 / 老年", "繁殖力低（当前<30% 或 基础<50%）"),
     "blue": "蓝色 = 怀孕母鼠，一律保护",
     "green": "绿色 = 无负面状态，基因好",
-    "hotkey": "H：开关高亮   Ctrl+K：一键屠宰",
-    "tidy": "一键屠宰  [Ctrl+K]",
-    "tidy1": "鼠标指向箱子按 Ctrl+K，确认。",
-    "tidy2": "红色和死鼠就地变成肉，留在原箱。",
+    "hotkey": "H：开关高亮",
+    "tidy": "用刀批量屠宰",
+    "tidy1": "拿剥皮刀点任意老鼠，同箱的红鼠",
+    "tidy2": "和死鼠一起变成肉，留在原箱。",
     "install": "安装",
     "ins_items": ("解压，把 RatRater 文件夹放进游戏 Mods 目录", "在模组菜单启用并重启"),
-    "foot": "屠宰需要玩家有刀。游戏原生加载器，无需 MelonLoader。",
+    "foot": "模组设置里可开关。游戏原生加载器，无需 MelonLoader。",
 }
 
 

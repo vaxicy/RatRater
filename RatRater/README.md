@@ -29,11 +29,12 @@ Works with the popular Duoji R-key sort: this applies when Duoji uses the **game
 | Key | Action |
 |---|---|
 | `H` | Toggle all highlights (on by default) |
-| `Ctrl+K` | One-click butcher (see below) |
 
-### One-Click Butcher
+### Blade Batch Butcher
 
-Point at a rat cage, backpack or container and press `Ctrl+K`. A confirmation panel shows how many rats in that container will be processed. On confirm, red rats are killed and butchered, dead rats are butchered directly, and the meat is placed back into the same container. Pregnant rats (blue) are left alone. Requires you to own a blade item. Tick "don't ask again" to skip the confirmation in the future (stored in PlayerPrefs).
+Use any skinning blade on a rat, and every red or dead rat in the same container is butchered at once. Live rats are killed then butchered; dead rats are butchered directly. The meat is placed back into the same container. Pregnant rats (blue) are left alone. If only one rat qualifies, behavior is unchanged from vanilla.
+
+All blade items that can butcher are supported — they share the game's blade callback. Toggle this feature on/off in the mod's settings section ("Batch Butcher"); off restores vanilla single-rat butchering.
 
 No save edits, no sprite changes, no sensitive capabilities — activation won't show a "potential danger" warning.
 
@@ -41,7 +42,7 @@ No save edits, no sprite changes, no sensitive capabilities — activation won't
 
 The mod uses the game's **built-in native mod loader**. No MelonLoader, no prerequisites.
 
-1. Download `RatRater-1.5.1.zip` from [Releases](../../releases).
+1. Download `RatRater-1.6.0.zip` from [Releases](../../releases).
 2. Exit the game, unzip, and copy the whole `RatRater` folder into the game's `Mods` directory, e.g.:
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -62,7 +63,7 @@ To uninstall, close the game and delete the `Mods\RatRater` folder. Saves are un
 
 ## Troubleshooting
 
-This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.5.1.
+This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.6.0.
 
 If highlights or cull-rats-last don't work, search `Player.log` in your save directory for `[RatRater]`:
 

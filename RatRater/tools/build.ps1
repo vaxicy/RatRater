@@ -19,7 +19,7 @@ foreach ($r in $refs) { $args += "-r:$r" }
 $args += (Join-Path $root 'src\RatRaterMod.cs')
 
 $sources = @(
-    'GameBridge.cs', 'Scorer.cs', 'HighlightRenderer.cs', 'SortPatch.cs', 'ButcherService.cs', 'RatRaterMod.cs'
+    'GameBridge.cs', 'Scorer.cs', 'HighlightRenderer.cs', 'SortPatch.cs', 'ButcherService.cs', 'BladeBatchPatch.cs', 'RatRaterMod.cs'
 ) | ForEach-Object { Join-Path $root "src\$_" }
 
 & dotnet $csc -nologo -target:library "-out:$out" '-langversion:latest' ($refs | ForEach-Object { "-r:$_" }) $sources
