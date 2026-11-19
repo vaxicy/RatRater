@@ -12,11 +12,11 @@ Each rat's grid cell gets a translucent color overlay. The rat sprite itself is 
 
 | Color | Meaning |
 |---|---|
-| 🔴 Red | Cull recommended (low genetics / older than 11 days) |
+| 🔴 Red | Cull recommended — starving / diseased / prion / scratch marks / overcrowding ≥2 / low immunity (<25) / old age / low fertility |
 | 🔵 Blue | Pregnant female — protected, never marked for culling |
-| 🟢 Green | Good breeding stock |
+| 🟢 Green | No negative status, and genetics above the game's baseline |
 
-Scoring uses six genetic traits: growth rate, litter size, immunity, max health, longevity, and hunger rate (lower is better for hunger). Age and pregnancy are factored in too.
+Red is driven by the game's own status flags, not a made-up formula. Fertility counts too: current fertility below 30% **or** base fertility below 50% turns a rat red. Old age means age ≥ 14 × the longevity gene. Genetics are scored against in-game baselines (growth 1, litter 3, immunity 30, max health 100, longevity 1, hunger 65 — lower hunger is better).
 
 ### Dead Rats Last
 
@@ -29,7 +29,6 @@ Works with the popular Duoji R-key sort: dead-rat-last applies when Duoji uses t
 | Key | Action |
 |---|---|
 | `H` | Toggle all highlights (on by default) |
-| `[` / `]` | Lower / raise the cull threshold (default 0.50; lower means fewer rats marked) |
 
 Display and sorting only. No save edits, no sprite changes, no sensitive capabilities — activation won't show a "potential danger" warning.
 
@@ -37,7 +36,7 @@ Display and sorting only. No save edits, no sprite changes, no sensitive capabil
 
 The mod uses the game's **built-in native mod loader**. No MelonLoader, no prerequisites.
 
-1. Download `RatRater-1.2.1.zip` from [Releases](../../releases).
+1. Download `RatRater-1.3.0.zip` from [Releases](../../releases).
 2. Exit the game, unzip, and copy the whole `RatRater` folder into the game's `Mods` directory, e.g.:
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -58,7 +57,7 @@ To uninstall, close the game and delete the `Mods\RatRater` folder. Saves are un
 
 ## Troubleshooting
 
-This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version (1.2.0 or earlier) — update to 1.2.1.
+This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.3.0.
 
 If highlights or dead-rat-last don't work, search `Player.log` in your save directory for `[RatRater]`:
 
@@ -83,7 +82,7 @@ tools/build.ps1        # compile src/*.cs into build/RatRater.dll with Roslyn
 - `src/Scorer.cs` — six-trait scoring and cull decision
 - `src/HighlightRenderer.cs` — highlight overlay rendering
 - `src/SortPatch.cs` — Harmony patch on the game's sort comparator for dead-rat-last
-- `src/RatRaterMod.cs` — mod entry, ticker, H toggle and threshold hotkeys
+- `src/RatRaterMod.cs` — mod entry, ticker, H toggle
 
 ## License
 
