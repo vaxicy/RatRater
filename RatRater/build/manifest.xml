@@ -7,5 +7,8 @@
   <Description>在鼠笼里直接高亮该淘汰的老鼠：红色=建议淘汰，蓝色=怀孕保护，绿色=优质留种。按 H 开关高亮，中括号键调淘汰阈值，F11 导出鼠群清单到存档目录的 RatRater 文件夹。整理背包时死老鼠自动排到最后，兼容多吉 R 键整理（走游戏原生排序时生效）。不改动老鼠外观与存档。</Description>
   <GameVersions><Version>0.46D</Version></GameVersions>
   <Assemblies><Assembly>RatRater.dll</Assembly></Assemblies>
-  <Capabilities/>
+  <Capabilities>
+    <Capability>reflection-external</Capability>
+    <Capability>files</Capability>
+  </Capabilities>
 </Mod>
