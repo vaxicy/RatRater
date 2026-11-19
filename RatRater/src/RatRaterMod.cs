@@ -4,6 +4,7 @@ using UnityEngine;
 public sealed class RatRaterMod : IMod
 {
     public const string BatchKey = "RatRater.BatchButcher";
+    public const string MeatKey = "RatRater.RatMeatLast";
     public static float Threshold = 0.5f;
     public static bool Enabled = true;
     public static bool ShowKeep = true;
@@ -12,6 +13,12 @@ public sealed class RatRaterMod : IMod
     {
         get { return PlayerPrefs.GetInt(BatchKey, 1) == 1; }
         set { PlayerPrefs.SetInt(BatchKey, value ? 1 : 0); PlayerPrefs.Save(); }
+    }
+
+    public static bool RatMeatLastEnabled
+    {
+        get { return PlayerPrefs.GetInt(MeatKey, 1) == 1; }
+        set { PlayerPrefs.SetInt(MeatKey, value ? 1 : 0); PlayerPrefs.Save(); }
     }
     private static ModLog _log;
     private static GameObject _ticker;
@@ -68,6 +75,10 @@ public sealed class RatRaterMod : IMod
                 () => ModHelper.GetLocalized(mod, "option_label"),
                 () => BatchButcherEnabled, v => BatchButcherEnabled = v,
                 () => ModHelper.GetLocalized(mod, "option_tooltip"));
+            ModHelper.AddGameOptionToggle(mod, mod, "meatlast",
+                () => ModHelper.GetLocalized(mod, "meat_option_label"),
+                () => RatMeatLastEnabled, v => RatMeatLastEnabled = v,
+                () => ModHelper.GetLocalized(mod, "meat_option_tooltip"));
         }
         catch (System.Exception e) { Log("options error: " + e.Message); }
 

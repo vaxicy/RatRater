@@ -1,3 +1,5 @@
 section_label,Rat Rater
 option_label,Batch butcher
 option_tooltip,Using a blade on a rat butchers all red/dead rats in the same container. Turn off to restore vanilla single-rat butchering.
+meat_option_label,Rat meat to bottom
+meat_option_tooltip,When tidying a container, rat meat sorts below rats and carcasses. Turn off to restore vanilla sorting for meat.

@@ -20,7 +20,7 @@ Red is driven by the game's own status flags, not a made-up formula. Fertility c
 
 ### Cull Rats Last
 
-During a sort, rats marked red (recommended for culling) and dead rats move to the last slots. Healthy rats stay in front, so you can select and drag the cull group in one motion. This mod does not add its own sort hotkey — it works with the game's built-in sort and compatible sorting mods.
+During a sort, items are ordered in three tiers: healthy rats first, then rats marked red (recommended for culling) and dead rats, and rat meat at the very bottom. Toggle "Rat meat to bottom" in the mod settings to disable that tier. This mod does not add its own sort hotkey — it works with the game's built-in sort and compatible sorting mods.
 
 Works with the popular Duoji R-key sort: this applies when Duoji uses the **game's native sorting path**. If you pick a third-party mode such as "smart sort" in the F4 panel, that algorithm bypasses the game's comparator and the feature won't apply — switch back to the "Native" preset.
 
@@ -42,7 +42,7 @@ No save edits, no sprite changes, no sensitive capabilities — activation won't
 
 The mod uses the game's **built-in native mod loader**. No MelonLoader, no prerequisites.
 
-1. Download `RatRater-1.6.2.zip` from [Releases](../../releases).
+1. Download `RatRater-1.7.0.zip` from [Releases](../../releases).
 2. Exit the game, unzip, and copy the whole `RatRater` folder into the game's `Mods` directory, e.g.:
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -63,7 +63,7 @@ To uninstall, close the game and delete the `Mods\RatRater` folder. Saves are un
 
 ## Troubleshooting
 
-This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.6.2.
+This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version — update to 1.7.0.
 
 If highlights or cull-rats-last don't work, search `Player.log` in your save directory for `[RatRater]`:
 
