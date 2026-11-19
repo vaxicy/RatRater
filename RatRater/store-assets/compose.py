@@ -124,7 +124,7 @@ T_EN = {
     "tidy1": "When you tidy a backpack, cull-flagged",
     "tidy2": "and dead rats drop to the last slots.",
     "install": "INSTALL",
-    "ins_items": ("Unzip RatRater-1.3.1.zip", "Copy the RatRater folder into Mods\\",
+    "ins_items": ("Unzip the mod archive", "Copy the RatRater folder into Mods\\",
                   "Enable in the in-game Mods menu", "Restart the game"),
     "foot": "Native mod loader. No MelonLoader.",
 }
@@ -143,7 +143,7 @@ T_ZH = {
     "tidy1": "整理背包时，红色老鼠和死老鼠",
     "tidy2": "自动排到最后，方便集中拖走。",
     "install": "安装",
-    "ins_items": ("解压 RatRater-1.3.1.zip", "把 RatRater 文件夹复制到 Mods\\",
+    "ins_items": ("解压模组压缩包", "把 RatRater 文件夹复制到 Mods\\",
                   "在游戏模组菜单启用", "重启游戏"),
     "foot": "游戏原生加载器，不需要 MelonLoader。",
 }
