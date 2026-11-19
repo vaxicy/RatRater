@@ -1,0 +1,90 @@
+# RatRater — 深空当铺老鼠淘汰高亮模组
+
+[English](README.md) | **简体中文**
+
+《深空当铺：可能是偷的》（**Probably Stolen**，Steam App 4348910）的原生 C# 模组。打开鼠笼就能一眼看出哪些老鼠该淘汰，不用悬停；整理背包时死老鼠自动排到最后。用的是游戏自带的模组加载器，**不需要 MelonLoader**。
+
+## 功能
+
+### 鼠笼高亮（常驻，不用悬停）
+
+老鼠所在格子盖一层半透明底色，老鼠图案本身不变。
+
+| 颜色 | 含义 |
+|---|---|
+| 🔴 红色 | 建议淘汰（基因偏低，或年长超过 11 天） |
+| 🔵 蓝色 | 怀孕母鼠，强制保护，不判淘汰 |
+| 🟢 绿色 | 优质留种 |
+
+基因看六项：生长速度、窝仔数、免疫力、最大健康值、寿命、饥饿速度。饥饿速度越低越好。年龄和怀孕状态也会一起算进去。
+
+### 死老鼠置底
+
+按 R 整理背包或仓库时，死老鼠挪到最后一格，活老鼠照常排在前面。
+
+跟多吉 R 键整理兼容：多吉走**游戏原生排序**时置底生效。如果它在 F4 面板里选了「智能排序」这类第三方方案，那套算法绕开了游戏排序器，置底就不生效——切回「原生 / Native」预设即可。
+
+### 快捷键
+
+| 按键 | 作用 |
+|---|---|
+| `H` | 开关全部高亮（默认开） |
+| `[` / `]` | 调低 / 调高淘汰阈值（默认 0.50，调低后被判淘汰的老鼠更少） |
+
+只改显示和排序，不动存档，不改老鼠外观，也不申请任何敏感权限——激活时不会弹「潜在危险」提示。
+
+## 安装
+
+模组走游戏**自带的原生加载器**，不用 MelonLoader，也没有额外前置。
+
+1. 到 [Releases](../../releases) 下载 `RatRater-1.2.0.zip`。
+2. 退出游戏，解压，把整个 `RatRater` 文件夹复制到游戏的 `Mods` 目录，例如：
+   ```
+   D:\Probably Stolen\Mods\RatRater\manifest.xml
+   D:\Probably Stolen\Mods\RatRater\RatRater.dll
+   ```
+3. 启动游戏，主菜单点「模组 / Mods」，找到 **老鼠淘汰高亮 / Rat Rater** 并启用。
+4. 按提示重启，读档进店，打开老鼠笼就能看到高亮。
+
+注意：`manifest.xml` 要直接放在 `Mods\RatRater\` 下面，不能多套一层变成 `Mods\Mods\RatRater`。
+
+卸载的话，关掉游戏删掉 `Mods\RatRater` 文件夹就行，存档不受影响。
+
+## 兼容与要求
+
+- 游戏：《Probably Stolen》正式版（Steam，`.VERSION 100-Rev12`；清单里写的是 `0.46D`）
+- 加载方式：游戏原生模组加载器，也就是带 `manifest.xml` 的 C# DLL
+- 无权限声明：不用运行时反射，不读写任意文件
+
+## 排查
+
+这个模组不用运行时反射，也不读写任意文件，manifest 里的 `Capabilities` 是空的，正常激活不会出「潜在危险」确认框。如果还弹，说明用的是旧版（1.1.0 及更早），升到 1.2.0 就好。
+
+高亮或置底没生效时，去存档目录的 `Player.log` 里搜 `[RatRater]`：
+
+- `sortPatch ok ...` —— 排序 patch 已加载；出现 `comparator not found` 说明游戏的排序器类名变了
+- `rats=N, cull=M` —— 模组正在扫描老鼠；这一行一直不出现的话，是没识别到游戏界面
+- `create mark error` —— 高亮层没挂上去
+
+把对应的日志行发到 Issues 就行。因为有封装层，修这种问题通常只动一处。
+
+## 开发
+
+源码在 `src/`，反编译和分析脚本在 `tools/`。编译用 Roslyn（`csc.dll`），引用 `Probably Stolen_Data\Managed` 里的 DLL，本机不用装 .NET SDK。
+
+```
+tools/scan_types.py    # 扫描程序集类型、字段、方法
+tools/dump_il.py       # 反编译方法 IL
+tools/dump_refs.py     # dump 类型、成员引用和字符串
+tools/build.ps1        # 用 Roslyn 把 src/*.cs 编译成 build/RatRater.dll
+```
+
+- `src/GameBridge.cs` —— 直接引用游戏 API（老鼠、界面元素、基因）
+- `src/Scorer.cs` —— 六项基因评分和淘汰判定
+- `src/HighlightRenderer.cs` —— 高亮渲染
+- `src/SortPatch.cs` —— Harmony patch 游戏排序器，实现死老鼠置底
+- `src/RatRaterMod.cs` —— 模组入口、ticker、H 开关和阈值快捷键
+
+## 许可
+
+MIT。游戏本体、名称与素材归 Questing Goose Studio 所有，本项目不含游戏资源。
