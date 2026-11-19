@@ -79,12 +79,11 @@ public sealed class RatRaterTicker : MonoBehaviour
             if (!_shown) _renderer.Clear();
             RatRaterMod.Log("highlight " + (_shown ? "on" : "off"));
         }
-        if (Input.GetKeyDown(KeyCode.LeftBracket) || Input.GetKeyDown(KeyCode.RightBracket))
+        ButcherService.Tick();
+
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            RatRaterMod.Threshold += Input.GetKeyDown(KeyCode.RightBracket) ? 0.05f : -0.05f;
-            if (RatRaterMod.Threshold < 0.1f) RatRaterMod.Threshold = 0.1f;
-            if (RatRaterMod.Threshold > 0.9f) RatRaterMod.Threshold = 0.9f;
-            RatRaterMod.Log("threshold=" + RatRaterMod.Threshold.ToString("F2"));
+            TryButcher();
         }
 
         if (!_shown) return;
@@ -111,6 +110,32 @@ public sealed class RatRaterTicker : MonoBehaviour
             foreach (var s in scores) if (s.Cull) cull++;
             RatRaterMod.Log("rats=" + scores.Count + ", cull=" + cull);
         }
+    }
+
+    private static void TryButcher()
+    {
+        if (!ButcherService.HasBlade())
+        {
+            RatRaterMod.Log("butcher: no blade found");
+            return;
+        }
+        var inv = ButcherService.CurrentInventory();
+        if (inv == null)
+        {
+            RatRaterMod.Log("butcher: point at a container first");
+            return;
+        }
+        int total;
+        var targets = ButcherService.CollectTargets(inv, out total);
+        if (targets.Count == 0)
+        {
+            RatRaterMod.Log("butcher: no cull/dead rats here");
+            return;
+        }
+        if (ButcherService.SkipConfirm)
+            ButcherService.RunButcher(inv, targets);
+        else
+            ButcherService.AskConfirm(inv, targets, total);
     }
 
     public void Clear() { _renderer.Clear(); }
