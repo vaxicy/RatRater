@@ -34,7 +34,7 @@ def font(size, bold=False, cn=False):
 def load_caps():
     os.makedirs(SRC, exist_ok=True)
     # 优先用带怀孕蓝色的新截图
-    new_cap = os.path.join(ASSETS, "image.1b24d5d632.png")
+    new_cap = os.path.join(ASSETS, "image.bf3e4b4889.png")
     if os.path.exists(new_cap):
         caps = [Image.open(new_cap).convert("RGB")]
     else:
