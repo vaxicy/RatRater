@@ -157,9 +157,9 @@ def compose_gallery(cap1, lang, t, outname):
     im = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(im)
 
-    d.rounded_rectangle((M, 26, RIGHT, 122), radius=10, fill=PANEL, outline=BORDER, width=2)
-    d.text((M + 26, 46), "RatRater", font=font(46, True), fill=WHITE)
-    text_fit(d, M + 26, 100, t["top_sub"], 18, RIGHT - M - 52, MUTED, cn=cn)
+    d.rounded_rectangle((M, 26, RIGHT, 132), radius=10, fill=PANEL, outline=BORDER, width=2)
+    d.text((M + 26, 38), "RatRater", font=font(42, True), fill=WHITE)
+    text_fit(d, M + 26, 92, t["top_sub"], 18, RIGHT - M - 52, MUTED, cn=cn)
 
     top, bottom = 150, H - 40
     avail_h = bottom - top

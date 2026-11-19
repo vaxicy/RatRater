@@ -71,7 +71,10 @@ internal static class Scorer
         string sex = GameBridge.GetStringTag(item, HusbandryHelper.ANIMAL_SEXE_TAG);
         s.Female = sex != null && (sex == "female" || sex == "1" || sex.ToLower().Contains("fem"));
 
-        s.Pregnant = HasPositiveFlag(item, HusbandryHelper.ANIMAL_PREGNANT_TAG);
+        // 怀孕：tag 是纯开关（数值可能为 0），存在即算怀孕；再查怀孕进度双保险。
+        s.Pregnant = item.IsTag(HusbandryHelper.ANIMAL_PREGNANT_TAG) ||
+                     GameBridge.GetFloatTag(item, HusbandryHelper.ANIMAL_PREGNANT_PROGRESS_TAG) > 0f;
+
         s.Age = GameBridge.GetFloatTag(item, HusbandryHelper.ANIMAL_AGE_TAG);
         float longevity = GameBridge.GetFloatTag(item, HusbandryHelper.ANIMAL_LONGEVITY_TAG);
         if (longevity <= 0f) longevity = 1f;
