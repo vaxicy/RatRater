@@ -20,7 +20,7 @@ Red is driven by the game's own status flags, not a made-up formula. Fertility c
 
 ### Cull Rats Last
 
-When you press R to tidy a backpack or storage, rats marked red (recommended for culling) and dead rats move to the last slots. Healthy rats stay in front, so you can select and drag the cull group in one motion.
+During a sort, rats marked red (recommended for culling) and dead rats move to the last slots. Healthy rats stay in front, so you can select and drag the cull group in one motion. This mod does not add its own sort hotkey — it works with the game's built-in sort and compatible sorting mods.
 
 Works with the popular Duoji R-key sort: this applies when Duoji uses the **game's native sorting path**. If you pick a third-party mode such as "smart sort" in the F4 panel, that algorithm bypasses the game's comparator and the feature won't apply — switch back to the "Native" preset.
 

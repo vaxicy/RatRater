@@ -70,11 +70,13 @@ def legend(d, x, y, gap, fs, labels, cn=False):
 
 
 def save(im, name):
+    """中文绝对路径下 PIL 会间歇 OSError 22，取 bytes 自己写盘最稳。"""
+    import io
+    buf = io.BytesIO()
+    im.save(buf, format="PNG")
     path = os.path.join(OUT, name)
-    try:
-        im.save(path)
-    except OSError:
-        im.save(os.path.relpath(path, os.getcwd()))
+    with open(path, "wb") as f:
+        f.write(buf.getvalue())
     print("saved", name, im.size)
 
 
@@ -118,9 +120,9 @@ T_EN = {
     "blue": "Blue = pregnant, always protected",
     "green": "Green = no status, good genetics",
     "hotkey": "Press H to toggle highlights",
-    "tidy": "TIDY WITH R",
-    "tidy1": "Cull-flagged and dead rats drop to the",
-    "tidy2": "end, ready to drag away in one motion.",
+    "tidy": "SINKS WHEN SORTING",
+    "tidy1": "When you tidy a backpack, cull-flagged",
+    "tidy2": "and dead rats drop to the last slots.",
     "install": "INSTALL",
     "ins_items": ("Unzip RatRater-1.3.1.zip", "Copy the RatRater folder into Mods\\",
                   "Enable in the in-game Mods menu", "Restart the game"),
@@ -137,9 +139,9 @@ T_ZH = {
     "blue": "蓝色 = 怀孕母鼠，一律保护",
     "green": "绿色 = 无负面状态，基因好",
     "hotkey": "按 H 开关高亮",
-    "tidy": "按 R 一键整理",
-    "tidy1": "红色老鼠和死老鼠排到最后，",
-    "tidy2": "方便一次性框选拖走。",
+    "tidy": "整理时自动置底",
+    "tidy1": "整理背包时，红色老鼠和死老鼠",
+    "tidy2": "自动排到最后，方便集中拖走。",
     "install": "安装",
     "ins_items": ("解压 RatRater-1.3.1.zip", "把 RatRater 文件夹复制到 Mods\\",
                   "在游戏模组菜单启用", "重启游戏"),
