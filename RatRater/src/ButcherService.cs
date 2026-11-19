@@ -46,7 +46,9 @@ internal static class ButcherService
 
     public static bool HasBlade()
     {
-        foreach (var it in EmporiumEntry.Instance.GetAllOwnedItems(false, true))
+        var inst = EmporiumEntry.Instance;
+        if (inst == null) return false;
+        foreach (var it in inst.GetAllOwnedItems(false, true))
             if (it != null && it.IsTag(HusbandryHelper.BLADE_ITEM_TAG)) return true;
         return false;
     }

@@ -82,18 +82,21 @@ public sealed class RatRaterTicker : MonoBehaviour
         ButcherService.Tick();
 
         bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-        if (ctrl && Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            TryButcher();
+            RatRaterMod.Log("K hit, ctrl=" + ctrl);
+            if (ctrl) TryButcher();
         }
 
         if (!_shown) return;
         if (Time.unscaledTime < _next) return;
         _next = Time.unscaledTime + 0.4f;
 
+        var elements = GameBridge.GetAllElements();
+        if (elements == null) return;
         var scores = new List<RatScore>();
         float hungerSum = 0f; int hungerN = 0;
-        foreach (var item in GameBridge.GetAllElements())
+        foreach (var item in elements)
         {
             if (item == null || !GameBridge.IsRat(item) || GameBridge.IsDead(item)) continue;
             float h = GameBridge.GetFloatTag(item, HusbandryHelper.ANIMAL_HUNGER_RATE_TAG);

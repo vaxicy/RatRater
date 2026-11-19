@@ -8,7 +8,8 @@ internal static class GameBridge
 
     public static IEnumerable<GameItem> GetAllElements()
     {
-        return EmporiumEntry.Instance.GetAllOwnedItems(false, true);
+        var inst = EmporiumEntry.Instance;
+        return inst == null ? null : inst.GetAllOwnedItems(false, true);
     }
 
     public static GameItemElement AsElement(GameItem item) { return item as GameItemElement; }
