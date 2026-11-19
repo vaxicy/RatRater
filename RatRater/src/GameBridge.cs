@@ -15,7 +15,9 @@ internal static class GameBridge
 
     public static RectTransform GetRectTransform(GameItemElement element)
     {
-        return element.rectTransform;
+        // 用 background 节点：它挂在 rotator 下，会跟随老鼠的 90° 旋转，
+        // 竖放的老鼠高亮才是竖的（element.rectTransform 是未旋转的外框）。
+        return element.background != null ? element.background.rectTransform : element.rectTransform;
     }
 
     public static bool IsRat(GameItem item)
