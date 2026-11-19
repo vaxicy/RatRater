@@ -62,10 +62,12 @@ public sealed class RatRaterMod : IMod
 
         try
         {
-            ModHelper.AddGameOptionSection("ratrater.section", "Rat Rater", () => "Rat highlighting and butchering");
-            ModHelper.AddGameOptionToggle("ratrater.batch", "ratrater.section", "Batch Butcher",
-                () => "Using a blade on a rat butchers all red/dead rats in that container",
-                () => BatchButcherEnabled, v => BatchButcherEnabled = v, () => "Gameplay");
+            const string mod = "ratrater";
+            ModHelper.AddGameOptionSection(mod, mod, () => ModHelper.GetLocalized(mod, "section_label"));
+            ModHelper.AddGameOptionToggle(mod, mod, "batch",
+                () => ModHelper.GetLocalized(mod, "option_label"),
+                () => BatchButcherEnabled, v => BatchButcherEnabled = v,
+                () => ModHelper.GetLocalized(mod, "option_tooltip"));
         }
         catch (System.Exception e) { Log("options error: " + e.Message); }
 
