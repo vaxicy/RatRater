@@ -1,5 +1,6 @@
-# 打包临时目录
+# 打包临时目录与探针产物
 stage/
+build/probe*.dll
 
 # 反编译中间分析产物（可用 tools 下脚本重新生成）
 tools/out_*.txt
