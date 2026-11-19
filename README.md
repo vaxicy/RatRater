@@ -37,7 +37,7 @@ Display and sorting only. No save edits, no sprite changes, no sensitive capabil
 
 The mod uses the game's **built-in native mod loader**. No MelonLoader, no prerequisites.
 
-1. Download `RatRater-1.2.0.zip` from [Releases](../../releases).
+1. Download `RatRater-1.2.1.zip` from [Releases](../../releases).
 2. Exit the game, unzip, and copy the whole `RatRater` folder into the game's `Mods` directory, e.g.:
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml
@@ -58,7 +58,7 @@ To uninstall, close the game and delete the `Mods\RatRater` folder. Saves are un
 
 ## Troubleshooting
 
-This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version (1.1.0 or earlier) — update to 1.2.0.
+This mod uses no runtime reflection and reads/writes no arbitrary files, so `Capabilities` in the manifest is empty and no "potential danger" dialog should appear. If one does, you are on an old version (1.2.0 or earlier) — update to 1.2.1.
 
 If highlights or dead-rat-last don't work, search `Player.log` in your save directory for `[RatRater]`:
 
