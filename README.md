@@ -2,8 +2,6 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
-This repository also hosts [WaterAutoLabel](WaterAutoLabel/README.md), a companion mod that auto-labels water containers with their true quality. Both use the game's built-in mod loader; **MelonLoader is not required**.
-
 A native C# mod for **Probably Stolen** (Steam App 4348910, the "Deep Space Pawn Shop" game). Open a rat cage and instantly see which rats are worth culling — no hovering needed. When you tidy an inventory, rats marked for culling and dead rats sort to the end so you can drag them away in one go.
 
 ## Features

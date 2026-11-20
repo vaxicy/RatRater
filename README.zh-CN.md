@@ -2,8 +2,6 @@
 
 [English](README.md) | **简体中文**
 
-本仓库还收录了 [WaterAutoLabel](WaterAutoLabel/README.md)，这是配套的模组，能按真实水质自动给水容器贴标签。两个模组都用游戏自带的加载器，**不需要 MelonLoader**。
-
 《深空当铺：可能是偷的》（**Probably Stolen**，Steam App 4348910）的原生 C# 模组。打开鼠笼就能一眼看出哪些老鼠该淘汰，不用悬停；整理背包时死老鼠自动排到最后。
 
 ## 功能
