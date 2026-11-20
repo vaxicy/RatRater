@@ -3,7 +3,7 @@
   <ID>RatRater</ID>
   <Name>老鼠淘汰高亮 / Rat Rater</Name>
   <Author>vaxicy</Author>
-  <ModVersion>1.7.2</ModVersion>
+  <ModVersion>1.7.3</ModVersion>
   <Description>在鼠笼里直接高亮该淘汰的老鼠：红色=建议淘汰，蓝色=怀孕保护，绿色=优质留种。按 H 开关高亮。整理背包时红色老鼠和死老鼠排到最后。用任意剥皮刀点击老鼠时，自动把同一箱子里所有红色和死老鼠切成肉，肉留在原箱子；在模组设置里可开关批量屠宰。不申请文件或反射权限。</Description>
   <GameVersions><Version>0.46D</Version></GameVersions>
   <Assemblies><Assembly>RatRater.dll</Assembly></Assemblies>
