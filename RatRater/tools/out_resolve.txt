@@ -1,0 +1,89 @@
+﻿=== TYPE: SortLoadoutMod.SortLoadout
+METHOD: ResolveByGeometry
+  ldloca.s     local(0x0000)
+  ldarg.1      
+  ldfld        token(0x0A000098) ; x
+  ldarg.1      
+  ldfld        token(0x0A000099) ; y
+  call         token(0x0A00007F) ; .ctor
+  ldnull       
+  stloc.1      
+  ldc.r4       -3.4028234663852886e+38
+  stloc.2      
+  ldarg.0      
+  callvirt     token(0x0A0000E3) ; GetEnumerator
+  stloc.3      
+  br           24332
+  ldloca.s     local(0x0003)
+  call         token(0x0A0000E4) ; get_Current
+  stloc.s      local(0x0004)
+  ldloc.s      local(0x0004)
+  ldfld        token(0x04000068) ; Inv
+  brfalse      24332
+  ldloc.s      local(0x0004)
+  ldfld        token(0x04000068) ; Inv
+  callvirt     token(0x0A0000E5) ; get_rectTransform
+  stloc.s      local(0x0005)
+  ldloc.s      local(0x0005)
+  ldnull       
+  call         token(0x0A000078) ; op_Equality
+  brtrue.s     24332
+  ldloc.s      local(0x0005)
+  callvirt     token(0x0A0000DE) ; get_gameObject
+  callvirt     token(0x0A0000DF) ; get_activeInHierarchy
+  brfalse.s    24332
+  ldloc.s      local(0x0005)
+  callvirt     token(0x2B000004) ; <table43 rid=4>
+  stloc.s      local(0x0006)
+  ldloc.s      local(0x0006)
+  ldnull       
+  call         token(0x0A00000E) ; op_Inequality
+  brfalse.s    24259
+  ldloc.s      local(0x0006)
+  callvirt     token(0x0A0000BB) ; get_renderMode
+  ldc.i4.1     
+  beq.s        24262
+  ldnull       
+  br.s         24269
+  ldloc.s      local(0x0006)
+  callvirt     token(0x0A0000BC) ; get_worldCamera
+  stloc.s      local(0x0007)
+  ldloc.s      local(0x0005)
+  ldloc.0      
+  ldloc.s      local(0x0007)
+  call         token(0x0A0000C0) ; RectangleContainsScreenPoint
+  brfalse.s    24332
+  ldloc.s      local(0x0006)
+  ldnull       
+  call         token(0x0A00000E) ; op_Inequality
+  brtrue.s     24296
+  ldc.i4.0     
+  br.s         24303
+  ldloc.s      local(0x0006)
+  callvirt     token(0x0A0000E6) ; get_sortingOrder
+  conv.r4      
+  ldc.r4       10000.0
+  mul          
+  ldloc.s      local(0x0005)
+  callvirt     token(0x0A0000E7) ; GetSiblingIndex
+  conv.r4      
+  add          
+  stloc.s      local(0x0008)
+  ldloc.s      local(0x0008)
+  ldloc.2      
+  ble.un.s     24332
+  ldloc.s      local(0x0008)
+  stloc.2      
+  ldloc.s      local(0x0004)
+  stloc.1      
+  ldloca.s     local(0x0003)
+  call         token(0x0A0000E8) ; MoveNext
+  brtrue       24171
+  leave.s      24360
+  ldloca.s     local(0x0003)
+  constrained. token(0x1B00001B) ; <table27 rid=27>
+  callvirt     token(0x0A00003B) ; Dispose
+  endfinally   
+  ldloc.1      
+  ret          
+

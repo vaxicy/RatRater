@@ -1,0 +1,114 @@
+﻿=== TYPE: .GameItemElement
+METHOD: ApplyRectTransform
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldarg.0      
+  call         token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB7) ; get_flipped
+  brtrue.s     1502799
+  ldc.i4.1     
+  br.s         1502800
+  ldc.i4.m1    
+  conv.r4      
+  ldc.r4       1.0
+  ldc.r4       1.0
+  newobj       token(0x0A0000AD) ; .ctor
+  callvirt     token(0x0A0006A1) ; set_localScale
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldc.r4       0.0
+  ldc.r4       1.0
+  newobj       token(0x0A0000A7) ; .ctor
+  callvirt     token(0x0A0002F5) ; set_anchorMin
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldc.r4       0.0
+  ldc.r4       1.0
+  newobj       token(0x0A0000A7) ; .ctor
+  callvirt     token(0x0A0002F7) ; set_anchorMax
+  ldarg.0      
+  call         token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB7) ; get_flipped
+  brtrue.s     1502899
+  ldc.i4.0     
+  br.s         1502900
+  ldc.i4.1     
+  conv.r4      
+  stloc.0      
+  ldarg.0      
+  call         token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB8) ; get_orientation
+  stloc.1      
+  ldloc.1      
+  switch       [1502934, 1502963, 1502998]
+  br.s         1503033
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldloc.0      
+  ldc.r4       1.0
+  newobj       token(0x0A0000A7) ; .ctor
+  callvirt     token(0x0A0003FD) ; set_pivot
+  br.s         1503060
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldc.r4       1.0
+  ldloc.0      
+  sub          
+  ldc.r4       1.0
+  newobj       token(0x0A0000A7) ; .ctor
+  callvirt     token(0x0A0003FD) ; set_pivot
+  br.s         1503060
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldc.r4       1.0
+  ldloc.0      
+  sub          
+  ldc.r4       0.0
+  newobj       token(0x0A0000A7) ; .ctor
+  callvirt     token(0x0A0003FD) ; set_pivot
+  br.s         1503060
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldloc.0      
+  ldc.r4       0.0
+  newobj       token(0x0A0000A7) ; .ctor
+  callvirt     token(0x0A0003FD) ; set_pivot
+  ldarg.0      
+  call         token(0x06003102) ; get_rotator
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldc.i4.s     90
+  ldarg.0      
+  call         token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB8) ; get_orientation
+  mul          
+  conv.r4      
+  call         token(0x0A000DBE) ; get_forward
+  call         token(0x0A000DBF) ; op_Multiply
+  callvirt     token(0x0A000DBD) ; set_localEulerAngles
+  ldarg.0      
+  call         token(0x06003100) ; get_middle
+  callvirt     token(0x060036D5) ; get_rectTransform
+  ldarg.0      
+  call         token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB1) ; get_minX
+  ldarg.1      
+  mul          
+  conv.r4      
+  ldarg.0      
+  call         token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB2) ; get_minY
+  neg          
+  ldarg.1      
+  mul          
+  conv.r4      
+  newobj       token(0x0A0000A7) ; .ctor
+  callvirt     token(0x0A00031A) ; set_anchoredPosition
+  ret          
+

@@ -1,0 +1,84 @@
+﻿=== FILE: D:\Probably Stolen\Probably Stolen_Data\Managed\Assembly-CSharp.dll
+typedefs: 2742
+
+TYPE: .CustomUIBuilder
+    FIELD: manager
+    FIELD: window
+    FIELD: parents
+    FIELD: tabContexts
+    FIELD: <Last>k__BackingField
+    METHOD: get_Last
+    METHOD: set_Last
+    METHOD: get_Handle
+    METHOD: .ctor
+    METHOD: .ctor
+    METHOD: get_CurrentParent
+    METHOD: get_CurrentContainer
+    METHOD: ClearContainer
+    METHOD: RebuildLayout
+    METHOD: SetSize
+    METHOD: SetPosition
+    METHOD: Center
+    METHOD: OnClose
+    METHOD: SetCloseOnEscape
+    METHOD: SetDraggable
+    METHOD: Show
+    METHOD: GetWindow
+    METHOD: UseMetaPrefabs
+    METHOD: UseMachineryStyle
+    METHOD: Spawn
+    METHOD: AddLabel
+    METHOD: AddHeader
+    METHOD: AddWarning
+    METHOD: AddSeparator
+    METHOD: AddButton
+    METHOD: AddCloseButton
+    METHOD: AddIconButton
+    METHOD: AddImage
+    METHOD: AddImage
+    METHOD: AddToggle
+    METHOD: AddSlider
+    METHOD: AddInput
+    METHOD: AddDropdown
+    METHOD: AddProgressBar
+    METHOD: AddSpace
+    METHOD: AddFlexibleSpace
+    METHOD: WithTooltip
+    METHOD: NewChild
+    METHOD: ConfigureGroup
+    METHOD: BeginRow
+    METHOD: BeginColumn
+    METHOD: BeginPanel
+    METHOD: BeginGrid
+    METHOD: BeginScroll
+    METHOD: BeginScrollFlexible
+    METHOD: BeginScrollInternal
+    METHOD: End
+    METHOD: BeginTabs
+    METHOD: BeginTab
+    METHOD: EndTabs
+    METHOD: SelectTab
+
+TYPE: .GenericConfirmationUIManager
+    FIELD: bodyTMP
+    FIELD: confirmButtonTMP
+    FIELD: cancelButtonTMP
+    FIELD: panel
+    FIELD: confirmationDarkness
+    FIELD: confirmButton
+    FIELD: cancelButton
+    FIELD: onConfirm
+    FIELD: onCancel
+    FIELD: <Instance>k__BackingField
+    METHOD: get_Instance
+    METHOD: set_Instance
+    METHOD: Awake
+    METHOD: Start
+    METHOD: Update
+    METHOD: OpenPanel
+    METHOD: OpenPanelSingleButton
+    METHOD: ClosePanel
+    METHOD: ConfirmButtonPressed
+    METHOD: CancelButtonPressed
+    METHOD: .ctor
+

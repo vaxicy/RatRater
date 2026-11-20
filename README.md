@@ -42,7 +42,7 @@ No save edits, no sprite changes, no sensitive capabilities — activation won't
 
 The mod uses the game's **built-in native mod loader**. No MelonLoader, no prerequisites.
 
-1. Download `RatRater-1.7.1.zip` from [Releases](../../releases).
+1. Download the latest RatRater zip from the [Releases](releases) page and unzip it.
 2. Exit the game, unzip, and copy the whole `RatRater` folder into the game's `Mods` directory, e.g.:
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml

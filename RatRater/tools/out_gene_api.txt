@@ -1,0 +1,200 @@
+﻿######## AlleleOptimizer.Apply
+=== TYPE: RatGeneticAlwaysImprove.AlleleOptimizer
+METHOD: Apply
+  ldarg.0      
+  brfalse.s    13233
+  ldarg.1      
+  brfalse.s    13233
+  ldarg.2      
+  brtrue.s     13235
+  ldc.i4.0     
+  ret          
+  ldarg.2      
+  ldfld        token(0x0A000066) ; geneticTraitIDs
+  stloc.0      
+  ldloc.0      
+  brfalse.s    13253
+  ldloc.0      
+  callvirt     token(0x0A000067) ; get_Count
+  brtrue.s     13255
+  ldc.i4.0     
+  ret          
+  ldc.i4.0     
+  stloc.1      
+  ldc.i4.0     
+  stloc.2      
+  br.s         13285
+  ldarg.0      
+  ldarg.1      
+  ldloc.0      
+  ldloc.2      
+  callvirt     token(0x0A000068) ; get_Item
+  call         token(0x0600003C) ; ApplyGene
+  brfalse.s    13281
+  ldloc.1      
+  ldc.i4.1     
+  add          
+  stloc.1      
+  ldloc.2      
+  ldc.i4.1     
+  add          
+  stloc.2      
+  ldloc.2      
+  ldloc.0      
+  callvirt     token(0x0A000067) ; get_Count
+  blt.s        13261
+  ldloc.1      
+  ldc.i4.0     
+  ble.s        13304
+  ldarg.0      
+  callvirt     token(0x0A000069) ; ValidateShapeState
+  ldloc.1      
+  ret          
+
+=== TYPE: RatGeneticAlwaysImprove.AlleleOptimizer
+METHOD: ApplyGene
+  ldarg.2      
+  call         token(0x0A000044) ; IsNullOrEmpty
+  brfalse.s    13330
+  ldc.i4.0     
+  ret          
+  ldarg.2      
+  ldstr        string token(0x700006C1) ; <tok 1879049921>
+  call         token(0x0A00001E) ; Concat
+  stloc.0      
+  ldarg.2      
+  ldstr        string token(0x700006D5) ; <tok 1879049941>
+  call         token(0x0A00001E) ; Concat
+  stloc.1      
+  ldarg.0      
+  ldloc.0      
+  ldloca.s     local(0x0002)
+  call         token(0x0600003E) ; TryReadAllele
+  brfalse.s    13376
+  ldarg.0      
+  ldloc.1      
+  ldloca.s     local(0x0003)
+  call         token(0x0600003E) ; TryReadAllele
+  brtrue.s     13378
+  ldc.i4.0     
+  ret          
+  ldarg.2      
+  call         token(0x06000040) ; IsHigherBetter
+  stloc.s      local(0x0004)
+  ldloc.s      local(0x0004)
+  brtrue.s     13397
+  ldc.r4       inf
+  br.s         13402
+  ldc.r4       -inf
+  stloc.s      local(0x0005)
+  ldc.i4.0     
+  stloc.s      local(0x0006)
+  ldarg.1      
+  ldloc.0      
+  ldloc.s      local(0x0004)
+  ldloca.s     local(0x0005)
+  ldloca.s     local(0x0006)
+  call         token(0x0600003D) ; AddCandidate
+  ldarg.1      
+  ldloc.1      
+  ldloc.s      local(0x0004)
+  ldloca.s     local(0x0005)
+  ldloca.s     local(0x0006)
+  call         token(0x0600003D) ; AddCandidate
+  ldarg.1      
+  ldarg.2      
+  ldstr        string token(0x700006E9) ; <tok 1879049961>
+  call         token(0x0A00001E) ; Concat
+  ldloc.s      local(0x0004)
+  ldloca.s     local(0x0005)
+  ldloca.s     local(0x0006)
+  call         token(0x0600003D) ; AddCandidate
+  ldarg.1      
+  ldarg.2      
+  ldstr        string token(0x7000070D) ; <tok 1879049997>
+  call         token(0x0A00001E) ; Concat
+  ldloc.s      local(0x0004)
+  ldloca.s     local(0x0005)
+  ldloca.s     local(0x0006)
+  call         token(0x0600003D) ; AddCandidate
+  ldloc.s      local(0x0006)
+  brtrue.s     13485
+  ldc.i4.0     
+  ret          
+  ldloc.s      local(0x0004)
+  brfalse.s    13507
+  ldloc.s      local(0x0005)
+  ldloc.2      
+  ldloc.3      
+  call         token(0x0A00004E) ; Max
+  call         token(0x0A00004E) ; Max
+  stloc.s      local(0x0005)
+######## AlleleOptimizer.TryReadAllele
+=== TYPE: RatGeneticAlwaysImprove.AlleleOptimizer
+METHOD: TryReadAllele
+  ldarg.2      
+  ldc.r4       0.0
+  stind.r4     
+  ldarg.0      
+  brfalse.s    13949
+  ldarg.1      
+  call         token(0x0A000044) ; IsNullOrEmpty
+  brtrue.s     13949
+  ldarg.0      
+  ldarg.1      
+  callvirt     token(0x0A00002C) ; IsTag
+  brtrue.s     13951
+  ldc.i4.0     
+  ret          
+  ldarg.2      
+  ldarg.0      
+  ldarg.1      
+  callvirt     token(0x0A00006D) ; GetTagReadonly
+  callvirt     token(0x0A00006E) ; GetFloat
+  stind.r4     
+  ldc.i4.1     
+  ret          
+
+######## AlleleOptimizer.WriteAllele
+=== TYPE: RatGeneticAlwaysImprove.AlleleOptimizer
+METHOD: WriteAllele
+  newobj       token(0x06000067) ; .ctor
+  stloc.0      
+  ldloc.0      
+  ldarg.2      
+  stfld        token(0x04000049) ; value
+  ldarg.0      
+  brfalse.s    14004
+  ldarg.1      
+  call         token(0x0A000044) ; IsNullOrEmpty
+  brfalse.s    14005
+  ret          
+  ldarg.0      
+  ldarg.1      
+  ldloc.0      
+  ldftn        token(0x06000068) ; <WriteAllele>b__0
+  newobj       token(0x0A00006F) ; .ctor
+  ldc.i4.1     
+  callvirt     token(0x0A000070) ; ModifyTag
+  pop          
+  ret          
+
+######## AlleleOptimizer.IsHigherBetter
+=== TYPE: RatGeneticAlwaysImprove.AlleleOptimizer
+METHOD: IsHigherBetter
+  ldsfld       token(0x0A000071) ; StatHigherIsBetter
+  stloc.0      
+  ldloc.0      
+  brfalse.s    14063
+  ldloc.0      
+  ldarg.0      
+  ldloca.s     local(0x0001)
+  callvirt     token(0x0A000072) ; TryGetValue
+  ldc.i4.0     
+  ceq          
+  br.s         14064
+  ldc.i4.1     
+  ldloc.1      
+  or           
+  ret          
+

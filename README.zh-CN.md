@@ -42,7 +42,7 @@
 
 模组走游戏**自带的原生加载器**，不用 MelonLoader，也没有额外前置。
 
-1. 到 [Releases](../../releases) 下载 `RatRater-1.7.1.zip`。
+1. 到 [Releases](releases) 页面下载最新版本的 RatRater zip 并解压。
 2. 退出游戏，解压，把整个 `RatRater` 文件夹复制到游戏的 `Mods` 目录，例如：
    ```
    D:\Probably Stolen\Mods\RatRater\manifest.xml

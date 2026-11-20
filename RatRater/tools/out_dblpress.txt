@@ -1,0 +1,87 @@
+﻿=== TYPE: .ItemMouseDoubleClickHandler
+METHOD: OnEventPress
+  call         token(0x06000CF3) ; get_BlocksClicks
+  brfalse.s    1597874
+  ldarg.0      
+  callvirt     token(0x06003223) ; OnEventReset
+  ret          
+  ldarg.0      
+  ldfld        token(0x040022FE) ; lastKey
+  stloc.0      
+  ldarg.1      
+  ldarg.0      
+  ldfld        token(0x040022FE) ; lastKey
+  callvirt     token(0x0A000E5A) ; Contains
+  brtrue.s     1597902
+  ldarg.1      
+  call         token(0x2B000221) ; <table43 rid=545>
+  stloc.0      
+  call         token(0x0A000308) ; get_mousePosition
+  call         token(0x0A000309) ; op_Implicit
+  stloc.1      
+  ldloc.1      
+  ldnull       
+  call         token(0x2B000059) ; <table43 rid=89>
+  stloc.2      
+  ldloc.2      
+  brfalse.s    1597932
+  ldloc.2      
+  call         token(0x06000B15) ; IsDisplayOnly
+  brfalse.s    1597939
+  ldarg.0      
+  callvirt     token(0x06003223) ; OnEventReset
+  ret          
+  ldarg.0      
+  ldfld        token(0x040022FD) ; lastClickedItem
+  brfalse.s    1597967
+  ldarg.0      
+  ldfld        token(0x04002300) ; pressFrame
+  ldarg.0      
+  ldfld        token(0x04002301) ; consumedPressFrame
+  bne.un.s     1597967
+  ldarg.0      
+  callvirt     token(0x06003223) ; OnEventReset
+  call         token(0x0A000306) ; get_frameCount
+  ldarg.0      
+  ldfld        token(0x04002301) ; consumedPressFrame
+  bne.un.s     1597987
+  ldarg.0      
+  callvirt     token(0x06003223) ; OnEventReset
+  ret          
+  ldarg.0      
+  ldfld        token(0x040022FD) ; lastClickedItem
+  ldloc.2      
+  bne.un.s     1598027
+  ldarg.0      
+  ldfld        token(0x040022FC) ; timeDeltaSeconds
+  ldarg.0      
+  ldfld        token(0x040022F9) ; doubleclickTimeThresholdSeconds
+  bge.un.s     1598027
+  ldloc.0      
+  ldarg.0      
+  ldfld        token(0x040022FE) ; lastKey
+  bne.un.s     1598027
+  ldarg.0      
+  ldc.i4.1     
+  stfld        token(0x04002302) ; isDoubleClick
+  ret          
+  ldarg.0      
+  ldc.i4.0     
+  stfld        token(0x04002302) ; isDoubleClick
+  ldarg.0      
+  ldc.r4       0.0
+  stfld        token(0x040022FC) ; timeDeltaSeconds
+  ldarg.0      
+  ldloc.2      
+  stfld        token(0x040022FD) ; lastClickedItem
+  ldarg.0      
+  ldloc.0      
+  stfld        token(0x040022FE) ; lastKey
+  ldarg.0      
+  ldloc.1      
+  stfld        token(0x040022FF) ; pressPosition
+  ldarg.0      
+  call         token(0x0A000306) ; get_frameCount
+  stfld        token(0x04002300) ; pressFrame
+  ret          
+

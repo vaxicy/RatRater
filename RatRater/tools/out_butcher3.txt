@@ -1,0 +1,32 @@
+﻿=== TYPE: .MachineAutoButcher
+METHOD: TryButcherAnimal
+  ldarg.0      
+  isinst       token(0x020002F2) ; GameItemElement
+  stloc.0      
+  ldloc.0      
+  brfalse.s    613432
+  ldloc.0      
+  callvirt     token(0x06003142) ; IsDestroyed
+  brfalse.s    613432
+  ldc.i4.2     
+  ret          
+  ldarg.0      
+  call         token(0x06000C22) ; CreateButcherCuts
+  stloc.1      
+  ldloc.1      
+  brtrue.s     613444
+  ldc.i4.2     
+  ret          
+  ldarg.1      
+  ldloc.1      
+  call         token(0x0600139E) ; PlaceAll
+  brtrue.s     613461
+  ldloc.1      
+  call         token(0x0600139F) ; DiscardAll
+  ldc.i4.1     
+  ret          
+  ldarg.0      
+  call         token(0x06000C23) ; CompleteButcher
+  ldc.i4.0     
+  ret          
+

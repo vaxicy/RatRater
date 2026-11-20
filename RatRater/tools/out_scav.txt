@@ -1,0 +1,17 @@
+﻿=== TYPE: ScavengeNoHurt.ScavengeNoHurtMod
+METHOD: OnEnable
+  call         token(0x06000011) ; Load
+  call         token(0x06000007) ; Register
+  ldarg.0      
+  ldfld        token(0x04000003) ; _log
+  ldstr        string token(0x70000021) ; <tok 1879048225>
+  call         token(0x0600000E) ; get_Enabled
+  brtrue.s     8361
+  ldstr        string token(0x70000041) ; <tok 1879048257>
+  br.s         8366
+  ldstr        string token(0x70000047) ; <tok 1879048263>
+  ldstr        string token(0x7000004D) ; <tok 1879048269>
+  call         token(0x0A00000A) ; Concat
+  callvirt     token(0x0A000009) ; Log
+  ret          
+

@@ -1,0 +1,141 @@
+﻿=== TYPE: SortLoadoutMod.SortLoadout
+METHOD: WindowContainsPoint
+  ldloca.s     local(0x0000)
+  ldarg.1      
+  ldfld        token(0x0A000098) ; x
+  ldarg.1      
+  ldfld        token(0x0A000099) ; y
+  call         token(0x0A00007F) ; .ctor
+  ldarg.0      
+  callvirt     token(0x0A0000B9) ; get_rectTransform
+  stloc.1      
+  ldloc.1      
+  ldnull       
+  call         token(0x0A00000E) ; op_Inequality
+  brfalse.s    21276
+  ldloc.1      
+  callvirt     token(0x2B000004) ; <table43 rid=4>
+  stloc.2      
+  ldloc.2      
+  ldnull       
+  call         token(0x0A00000E) ; op_Inequality
+  brfalse.s    21212
+  ldloc.2      
+  callvirt     token(0x0A0000BB) ; get_renderMode
+  ldc.i4.1     
+  beq.s        21215
+  ldnull       
+  br.s         21221
+  ldloc.2      
+  callvirt     token(0x0A0000BC) ; get_worldCamera
+  stloc.3      
+  ldloc.1      
+  callvirt     token(0x0A0000BD) ; get_rect
+  stloc.s      local(0x0004)
+  ldloca.s     local(0x0004)
+  call         token(0x0A0000BE) ; get_width
+  ldc.r4       2.0
+  blt.un.s     21276
+  ldloca.s     local(0x0004)
+  call         token(0x0A0000BF) ; get_height
+  ldc.r4       2.0
+  blt.un.s     21276
+  ldloc.1      
+  ldloc.0      
+  ldloc.3      
+  call         token(0x0A0000C0) ; RectangleContainsScreenPoint
+  brfalse.s    21276
+  ldc.i4.1     
+  stloc.s      local(0x0005)
+  leave        21480
+  leave.s      21281
+  pop          
+  leave.s      21281
+  nop          
+  ldarg.0      
+  callvirt     token(0x0A0000C1) ; get_handler
+  stloc.s      local(0x0006)
+  ldloc.s      local(0x0006)
+  ldnull       
+  call         token(0x0A000078) ; op_Equality
+  brfalse.s    21308
+  ldc.i4.0     
+  stloc.s      local(0x0005)
+  leave        21480
+  ldloc.s      local(0x0006)
+  callvirt     token(0x0A0000C2) ; get_rectTransform
+  stloc.s      local(0x0007)
+  ldloc.s      local(0x0007)
+  ldnull       
+  call         token(0x0A000078) ; op_Equality
+  brfalse.s    21335
+  ldc.i4.0     
+  stloc.s      local(0x0005)
+  leave        21480
+  ldloc.s      local(0x0007)
+  callvirt     token(0x2B000004) ; <table43 rid=4>
+  stloc.s      local(0x0008)
+  ldloc.s      local(0x0008)
+  ldnull       
+  call         token(0x0A00000E) ; op_Inequality
+  brfalse.s    21364
+  ldloc.s      local(0x0008)
+  callvirt     token(0x0A0000BB) ; get_renderMode
+  ldc.i4.1     
+  beq.s        21367
+  ldnull       
+  br.s         21374
+  ldloc.s      local(0x0008)
+  callvirt     token(0x0A0000BC) ; get_worldCamera
+  stloc.s      local(0x0009)
+  ldloc.s      local(0x0007)
+  ldc.i4.1     
+  callvirt     token(0x2B000005) ; <table43 rid=5>
+  stloc.s      local(0x000A)
+  ldc.i4.0     
+  stloc.s      local(0x000B)
+  br.s         21465
+  ldloc.s      local(0x000A)
+  ldloc.s      local(0x000B)
+  ldelem.ref   
+  stloc.s      local(0x000C)
+  ldloc.s      local(0x000C)
+  callvirt     token(0x0A0000BD) ; get_rect
+  stloc.s      local(0x000D)
+  ldloca.s     local(0x000D)
+  call         token(0x0A0000BE) ; get_width
+  ldc.r4       2.0
+  blt.s        21435
+  ldloca.s     local(0x000D)
+  call         token(0x0A0000BF) ; get_height
+  ldc.r4       2.0
+  bge.un.s     21437
+  leave.s      21459
+  ldloc.s      local(0x000C)
+  ldloc.0      
+  ldloc.s      local(0x0009)
+  call         token(0x0A0000C0) ; RectangleContainsScreenPoint
+  brfalse.s    21454
+  ldc.i4.1     
+  stloc.s      local(0x0005)
+  leave.s      21480
+  leave.s      21459
+  pop          
+  leave.s      21459
+  ldloc.s      local(0x000B)
+  ldc.i4.1     
+  add          
+  stloc.s      local(0x000B)
+  ldloc.s      local(0x000B)
+  ldloc.s      local(0x000A)
+  ldlen        
+  conv.i4      
+  blt.s        21391
+  leave.s      21478
+  pop          
+  leave.s      21478
+  ldc.i4.0     
+  ret          
+  ldloc.s      local(0x0005)
+  ret          
+

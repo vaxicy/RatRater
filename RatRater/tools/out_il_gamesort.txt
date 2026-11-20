@@ -1,0 +1,141 @@
+﻿=== TYPE: .InventorySortHelper
+METHOD: Sort
+  newobj       token(0x06004A00) ; .ctor
+  stloc.0      
+  ldloc.0      
+  ldarg.1      
+  stfld        token(0x04003211) ; bigFirst
+  ldarg.0      
+  call         token(0x06000CD8) ; CanSort
+  brtrue.s     399671
+  ldc.i4.0     
+  ret          
+  call         token(0x060016C6) ; get_SortAutoRotate
+  stloc.1      
+  ldloc.0      
+  ldarg.0      
+  callvirt     token(0x06002E35) ; get_inventoryShape
+  stfld        token(0x04003212) ; inventoryShape
+  ldarg.0      
+  callvirt     token(0x06002EC3) ; get_childItems
+  ldsfld       token(0x0400320C) ; <>9__4_0
+  dup          
+  brtrue.s     399726
+  pop          
+  ldsfld       token(0x0400320A) ; <>9
+  ldftn        token(0x060049FC) ; <Sort>b__4_0
+  newobj       token(0x0A0001EA) ; .ctor
+  dup          
+  stsfld       token(0x0400320C) ; <>9__4_0
+  call         token(0x2B00003E) ; <table43 rid=62>
+  call         token(0x2B000008) ; <table43 rid=8>
+  stloc.2      
+  ldarg.0      
+  callvirt     token(0x06002EC3) ; get_childItems
+  ldsfld       token(0x0400320D) ; <>9__4_1
+  dup          
+  brtrue.s     399774
+  pop          
+  ldsfld       token(0x0400320A) ; <>9
+  ldftn        token(0x060049FD) ; <Sort>b__4_1
+  newobj       token(0x0A0001EA) ; .ctor
+  dup          
+  stsfld       token(0x0400320D) ; <>9__4_1
+  call         token(0x2B00003E) ; <table43 rid=62>
+  call         token(0x2B000008) ; <table43 rid=8>
+  stloc.3      
+  ldloc.0      
+  newobj       token(0x0A000365) ; .ctor
+  stfld        token(0x04003210) ; preferred
+  ldloc.2      
+  callvirt     token(0x0A000059) ; GetEnumerator
+  stloc.s      local(0x0006)
+  br.s         399857
+  ldloca.s     local(0x0006)
+  call         token(0x0A00005A) ; get_Current
+  stloc.s      local(0x0007)
+  ldloc.0      
+  ldfld        token(0x04003210) ; preferred
+  ldloc.s      local(0x0007)
+  ldloc.1      
+  brtrue.s     399840
+  ldloc.s      local(0x0007)
+  callvirt     token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB8) ; get_orientation
+  br.s         399852
+  ldloc.s      local(0x0007)
+  callvirt     token(0x06003005) ; get_modifiedShape
+  call         token(0x06000CE6) ; WideOrientation
+  callvirt     token(0x0A000366) ; set_Item
+  ldloca.s     local(0x0006)
+  call         token(0x0A00005C) ; MoveNext
+  brtrue.s     399806
+  leave.s      399882
+  ldloca.s     local(0x0006)
+  constrained. token(0x1B000027) ; <table27 rid=39>
+  callvirt     token(0x0A000015) ; Dispose
+  endfinally   
+  ldloc.2      
+  ldloc.0      
+  ldftn        token(0x06004A01) ; <Sort>b__2
+  newobj       token(0x0A0002D8) ; .ctor
+  callvirt     token(0x0A0002D9) ; Sort
+  newobj       token(0x060049F7) ; .ctor
+  dup          
+  ldarg.0      
+  stfld        token(0x04003201) ; inventory
+  dup          
+  ldloc.0      
+  ldfld        token(0x04003212) ; inventoryShape
+  stfld        token(0x04003202) ; inventoryShape
+  dup          
+  ldloc.2      
+  stfld        token(0x04003203) ; movingItems
+  dup          
+  ldloc.0      
+  ldfld        token(0x04003210) ; preferred
+  stfld        token(0x04003204) ; preferredOrientation
+  dup          
+  ldloc.1      
+  stfld        token(0x04003205) ; autoRotate
+  dup          
+  ldarg.2      
+  stfld        token(0x04003206) ; fromEnd
+  stloc.s      local(0x0004)
+  ldloc.s      local(0x0004)
+  ldloc.3      
+  call         token(0x06000CDE) ; NewOccupancy
+  call         token(0x06000CE0) ; PackShelves
+  dup          
+  brtrue.s     399989
+  pop          
+  ldloc.s      local(0x0004)
+  ldloc.3      
+  call         token(0x06000CDE) ; NewOccupancy
+  call         token(0x06000CE2) ; PackFirstFit
+  stloc.s      local(0x0005)
+  ldloc.s      local(0x0005)
+  brtrue.s     399997
+  ldc.i4.0     
+  ret          
+  ldsfld       token(0x040004AE) ; undoSnapshots
+  ldarg.0      
+  ldloc.2      
+  ldsfld       token(0x0400320E) ; <>9__4_3
+  dup          
+  brtrue.s     400035
+  pop          
+  ldsfld       token(0x0400320A) ; <>9
+  ldftn        token(0x060049FE) ; <Sort>b__4_3
+  newobj       token(0x0A000367) ; .ctor
+  dup          
+  stsfld       token(0x0400320E) ; <>9__4_3
+  call         token(0x2B000060) ; <table43 rid=96>
+  call         token(0x2B000061) ; <table43 rid=97>
+  callvirt     token(0x0A000368) ; set_Item
+  ldarg.0      
+  ldloc.s      local(0x0005)
+  call         token(0x06000CDF) ; Commit
+  ldc.i4.1     
+  ret          
+

@@ -1,0 +1,94 @@
+﻿=== TYPE: .<>c__DisplayClass4_0
+METHOD: <Sort>b__2
+  ldarg.1      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  ldarg.0      
+  ldfld        token(0x04003210) ; preferred
+  ldarg.1      
+  callvirt     token(0x0A0011DB) ; get_Item
+  call         token(0x06000CE7) ; OrientedHeight
+  stloc.0      
+  ldarg.2      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  ldarg.0      
+  ldfld        token(0x04003210) ; preferred
+  ldarg.2      
+  callvirt     token(0x0A0011DB) ; get_Item
+  call         token(0x06000CE7) ; OrientedHeight
+  stloc.1      
+  ldloc.0      
+  ldloc.1      
+  beq.s        1870454
+  ldarg.0      
+  ldfld        token(0x04003211) ; bigFirst
+  brtrue.s     1870445
+  ldloca.s     local(0x0000)
+  ldloc.1      
+  call         token(0x0A0011B7) ; CompareTo
+  ret          
+  ldloca.s     local(0x0001)
+  ldloc.0      
+  call         token(0x0A0011B7) ; CompareTo
+  ret          
+  ldarg.1      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  call         token(0x06000CEA) ; CellCount
+  stloc.2      
+  ldarg.2      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  call         token(0x06000CEA) ; CellCount
+  stloc.3      
+  ldloc.2      
+  ldloc.3      
+  beq.s        1870508
+  ldarg.0      
+  ldfld        token(0x04003211) ; bigFirst
+  brtrue.s     1870499
+  ldloca.s     local(0x0002)
+  ldloc.3      
+  call         token(0x0A0011B7) ; CompareTo
+  ret          
+  ldloca.s     local(0x0003)
+  ldloc.2      
+  call         token(0x0A0011B7) ; CompareTo
+  ret          
+  ldarg.1      
+  callvirt     token(0x0600300F) ; get_identifier
+  ldarg.2      
+  callvirt     token(0x0600300F) ; get_identifier
+  ldc.i4.4     
+  call         token(0x0A0011DC) ; Compare
+  stloc.s      local(0x0004)
+  ldloc.s      local(0x0004)
+  brfalse.s    1870535
+  ldloc.s      local(0x0004)
+  ret          
+  ldarg.1      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB2) ; get_minY
+  ldarg.0      
+  ldfld        token(0x04003212) ; inventoryShape
+  callvirt     token(0x06002DB9) ; get_width
+  mul          
+  ldarg.1      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB1) ; get_minX
+  add          
+  stloc.s      local(0x0005)
+  ldarg.2      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB2) ; get_minY
+  ldarg.0      
+  ldfld        token(0x04003212) ; inventoryShape
+  callvirt     token(0x06002DB9) ; get_width
+  mul          
+  ldarg.2      
+  callvirt     token(0x06003005) ; get_modifiedShape
+  callvirt     token(0x06002DB1) ; get_minX
+  add          
+  stloc.s      local(0x0006)
+  ldloca.s     local(0x0005)
+  ldloc.s      local(0x0006)
+  call         token(0x0A0011B7) ; CompareTo
+  ret          
+

@@ -1,0 +1,39 @@
+﻿=== TYPE: RatGeneticAlwaysImprove.RatGeneticAlwaysImproveMod
+METHOD: Init
+  ldarg.0      
+  call         token(0x06000019) ; set_Instance
+  ldarg.1      
+  brfalse.s    10373
+  ldarg.1      
+  ldfld        token(0x0A000043) ; ID
+  call         token(0x0A000044) ; IsNullOrEmpty
+  brtrue.s     10373
+  ldarg.1      
+  ldfld        token(0x0A000043) ; ID
+  call         token(0x0600001D) ; set_ModId
+  ldarg.1      
+  newobj       token(0x0A000045) ; .ctor
+  call         token(0x0600001B) ; set_Log
+  call         token(0x0600001C) ; get_ModId
+  call         token(0x06000031) ; Initialize
+  call         token(0x0600001A) ; get_Log
+  ldstr        string token(0x7000014D) ; <tok 1879048525>
+  call         token(0x06000034) ; Describe
+  call         token(0x0A00001E) ; Concat
+  callvirt     token(0x0A000040) ; Log
+  leave.s      10457
+  stloc.0      
+  call         token(0x0600001A) ; get_Log
+  ldstr        string token(0x7000015D) ; <tok 1879048541>
+  ldloc.0      
+  dup          
+  brtrue.s     10440
+  pop          
+  ldnull       
+  br.s         10445
+  callvirt     token(0x0A000013) ; ToString
+  call         token(0x0A00001E) ; Concat
+  callvirt     token(0x0A000046) ; Error
+  leave.s      10457
+  ret          
+

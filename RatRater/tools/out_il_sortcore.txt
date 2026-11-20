@@ -1,0 +1,629 @@
+﻿=== TYPE: SortLoadoutMod.SortLoadout
+METHOD: ExecuteCore
+  ldsfld       token(0x0400002C) ; SkipMachines
+  dup          
+  brtrue.s     28308
+  pop          
+  ldc.i4.0     
+  br.s         28313
+  call         token(0x0A000014) ; get_Value
+  stloc.0      
+  ldsfld       token(0x0400002D) ; SkipPower
+  dup          
+  brtrue.s     28326
+  pop          
+  ldc.i4.0     
+  br.s         28331
+  call         token(0x0A000014) ; get_Value
+  stloc.1      
+  ldsfld       token(0x0400002E) ; SkipContainers
+  dup          
+  brtrue.s     28344
+  pop          
+  ldc.i4.0     
+  br.s         28349
+  call         token(0x0A000014) ; get_Value
+  stloc.2      
+  ldloc.0      
+  ldloc.1      
+  or           
+  ldloc.2      
+  or           
+  stloc.3      
+  call         token(0x06000032) ; HasPendingGuard
+  brfalse.s    28400
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     28374
+  pop          
+  br.s         28384
+  ldstr        string token(0x70001F99) ; <tok 1879056281>
+  call         token(0x06000099) ; Msg
+  ldstr        string token(0x70001FD3) ; <tok 1879056339>
+  ldc.r4       3.0
+  call         token(0x0600004F) ; ShowToast
+  ret          
+  ldarg.0      
+  call         token(0x06000064) ; IsMachineInternalInventory
+  brfalse.s    28445
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     28419
+  pop          
+  br.s         28429
+  ldstr        string token(0x70001FF9) ; <tok 1879056377>
+  call         token(0x06000099) ; Msg
+  ldstr        string token(0x70002045) ; <tok 1879056453>
+  ldc.r4       4.0
+  call         token(0x0600004F) ; ShowToast
+  ret          
+  ldarg.1      
+  ldc.i4.s     100
+  blt          29065
+  ldarg.1      
+  ldc.i4.s     100
+  sub          
+  call         token(0x06000077) ; At
+  stloc.s      local(0x0008)
+  ldloc.s      local(0x0008)
+  brtrue.s     28528
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     28479
+  pop          
+  br.s         28512
+  ldstr        string token(0x70002067) ; <tok 1879056487>
+  ldarg.1      
+  ldc.i4.s     100
+  sub          
+  stloc.s      local(0x000B)
+  ldloca.s     local(0x000B)
+  call         token(0x0A000022) ; ToString
+  ldstr        string token(0x70002083) ; <tok 1879056515>
+  call         token(0x0A000021) ; Concat
+  call         token(0x06000099) ; Msg
+  ldstr        string token(0x700020AB) ; <tok 1879056555>
+  ldc.r4       4.0
+  call         token(0x0600004F) ; ShowToast
+  ret          
+  ldloc.s      local(0x0008)
+  ldfld        token(0x04000094) ; Active
+  brtrue.s     28608
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     28548
+  pop          
+  br.s         28575
+  ldstr        string token(0x700020E5) ; <tok 1879056613>
+  ldloc.s      local(0x0008)
+  ldfld        token(0x0400008E) ; Label
+  ldstr        string token(0x700020FD) ; <tok 1879056637>
+  call         token(0x0A000021) ; Concat
+  call         token(0x06000099) ; Msg
+  ldstr        string token(0x7000211F) ; <tok 1879056671>
+  ldloc.s      local(0x0008)
+  ldfld        token(0x0400008F) ; Source
+  ldstr        string token(0x70002123) ; <tok 1879056675>
+  call         token(0x0A000021) ; Concat
+  ldc.r4       5.0
+  call         token(0x0600004F) ; ShowToast
+  ret          
+  ldarg.0      
+  call         token(0x0A000108) ; CanSort
+  brtrue       28761
+  ldc.i4.0     
+  stloc.s      local(0x000C)
+  ldarg.0      
+  callvirt     token(0x0A000025) ; get_childItems
+  brfalse.s    28646
+  ldarg.0      
+  callvirt     token(0x0A000025) ; get_childItems
+  callvirt     token(0x0A000026) ; get_Count
+  ldc.i4.0     
+  cgt          
+  br.s         28647
+  ldc.i4.0     
+  stloc.s      local(0x000C)
+  leave.s      28654
+  pop          
+  leave.s      28654
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     28665
+  pop          
+  br.s         28734
+  ldc.i4.5     
+  newarr       token(0x0100004D) ; System.String
+  dup          
+  ldc.i4.0     
+  ldstr        string token(0x700020E5) ; <tok 1879056613>
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldloc.s      local(0x0008)
+  ldfld        token(0x0400008E) ; Label
+  stelem.ref   
+  dup          
+  ldc.i4.2     
+  ldstr        string token(0x7000215F) ; <tok 1879056735>
+  stelem.ref   
+  dup          
+  ldc.i4.3     
+  ldloc.s      local(0x000C)
+  brtrue.s     28710
+  ldstr        string token(0x70002197) ; <tok 1879056791>
+  br.s         28715
+  ldstr        string token(0x7000219B) ; <tok 1879056795>
+  stelem.ref   
+  dup          
+  ldc.i4.4     
+  ldstr        string token(0x70001923) ; <tok 1879054627>
+  stelem.ref   
+  call         token(0x0A000023) ; Concat
+  call         token(0x06000099) ; Msg
+  ldloc.s      local(0x000C)
+  brtrue.s     28745
+  ldstr        string token(0x700021A1) ; <tok 1879056801>
+  br.s         28750
+  ldstr        string token(0x700021C5) ; <tok 1879056837>
+  ldc.r4       4.0
+  call         token(0x0600004F) ; ShowToast
+  ret          
+  ldloc.3      
+  brtrue.s     28767
+  ldnull       
+  br.s         28776
+  ldarg.0      
+  ldloc.0      
+  ldloc.1      
+  ldloc.2      
+  call         token(0x06000066) ; CaptureGuard
+  stloc.s      local(0x0009)
+  ldloc.s      local(0x0008)
+  ldarg.0      
+  ldloc.3      
+  call         token(0x06000078) ; Invoke
+  stloc.s      local(0x000A)
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     28800
+  pop          
+  br.s         28870
+  ldc.i4.6     
+  newarr       token(0x0100004D) ; System.String
+  dup          
+  ldc.i4.0     
+  ldstr        string token(0x700021F7) ; <tok 1879056887>
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldloc.s      local(0x0008)
+  ldfld        token(0x0400008E) ; Label
+  stelem.ref   
+  dup          
+  ldc.i4.2     
+  ldstr        string token(0x70002215) ; <tok 1879056917>
+  stelem.ref   
+  dup          
+  ldc.i4.3     
+  ldloc.s      local(0x0008)
+  ldfld        token(0x0400008F) ; Source
+  stelem.ref   
+  dup          
+  ldc.i4.4     
+  ldstr        string token(0x70002221) ; <tok 1879056929>
+  stelem.ref   
+  dup          
+  ldc.i4.5     
+  ldloca.s     local(0x000A)
+  call         token(0x0A000109) ; ToString
+  stelem.ref   
+  call         token(0x0A000023) ; Concat
+  call         token(0x06000099) ; Msg
+  ldloc.s      local(0x000A)
+  brtrue.s     28889
+  ldstr        string token(0x7000222D) ; <tok 1879056941>
+  ldc.r4       4.0
+  call         token(0x0600004F) ; ShowToast
+  ldloc.s      local(0x000A)
+  brfalse.s    28897
+  ldloc.s      local(0x0009)
+  brtrue.s     28898
+  ret          
+  ldloc.s      local(0x0009)
+  ldfld        token(0x04000078) ; Anchors
+  brtrue.s     28918
+  ldstr        string token(0x70002263) ; <tok 1879056995>
+  call         token(0x06000013) ; Debug
+  ret          
+  newobj       token(0x060000B0) ; .ctor
+  dup          
+  ldloc.s      local(0x0009)
+  stfld        token(0x04000060) ; Set
+  dup          
+  ldarg.0      
+  stfld        token(0x04000061) ; Inv
+  dup          
+  ldloc.s      local(0x0008)
+  stfld        token(0x04000062) ; Option
+  dup          
+  ldloc.s      local(0x0008)
+  ldfld        token(0x0400008E) ; Label
+  stfld        token(0x04000063) ; Label
+  dup          
+  call         token(0x0A000071) ; get_unscaledTime
+  stfld        token(0x04000064) ; StartAt
+  dup          
+  ldc.i4.0     
+  stfld        token(0x04000065) ; Frames
+  dup          
+  ldc.i4.0     
+  stfld        token(0x04000066) ; SeenBusy
+  stsfld       token(0x04000017) ; _pendingGuard
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     28999
+  pop          
+  ret          
+  ldc.i4.5     
+  newarr       token(0x0100004D) ; System.String
+  dup          
+  ldc.i4.0     
+  ldstr        string token(0x7000140D) ; <tok 1879053325>
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldloc.s      local(0x0008)
+  ldfld        token(0x0400008E) ; Label
+  stelem.ref   
+  dup          
+  ldc.i4.2     
+  ldstr        string token(0x700022C1) ; <tok 1879057089>
+  stelem.ref   
+  dup          
+  ldc.i4.3     
+  ldloc.s      local(0x0009)
+  ldflda       token(0x04000078) ; Anchors
+  call         token(0x0A000022) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.4     
+  ldstr        string token(0x700022D9) ; <tok 1879057113>
+  stelem.ref   
+  call         token(0x0A000023) ; Concat
+  call         token(0x06000099) ; Msg
+  ret          
+  ldarg.1      
+  ldc.i4.4     
+  beq.s        29100
+  ldarg.1      
+  ldc.i4.4     
+  bge.s        29097
+  ldsfld       token(0x0400002B) ; PresetMethod
+  ldarg.1      
+  ldelem.ref   
+  dup          
+  brtrue.s     29087
+  pop          
+  ldc.i4.0     
+  br.s         29092
+  call         token(0x0A000081) ; get_Value
+  ldc.i4.1     
+  ceq          
+  br.s         29101
+  ldc.i4.0     
+  br.s         29101
+  ldc.i4.1     
+  stloc.s      local(0x0004)
+  ldloc.s      local(0x0004)
+  ldloc.3      
+  and          
+  brfalse.s    29148
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29120
+  pop          
+  br.s         29130
+  ldstr        string token(0x70002305) ; <tok 1879057157>
+  call         token(0x06000099) ; Msg
+  ldstr        string token(0x70002345) ; <tok 1879057221>
+  ldc.r4       3.0
+  call         token(0x0600004F) ; ShowToast
+  ldc.i4.0     
+  stloc.s      local(0x0004)
+  ldloc.s      local(0x0004)
+  brfalse      29373
+  call         token(0x0600006D) ; SmartArrangeAvailable
+  brtrue.s     29198
+  ldstr        string token(0x70002375) ; <tok 1879057269>
+  ldc.r4       3.0
+  call         token(0x0600004F) ; ShowToast
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29187
+  pop          
+  ret          
+  ldstr        string token(0x700023BD) ; <tok 1879057341>
+  call         token(0x06000099) ; Msg
+  ret          
+  ldarg.0      
+  call         token(0x06000052) ; Rebind
+  dup          
+  brtrue.s     29209
+  pop          
+  ldarg.0      
+  starg.s      argument(0x0000)
+  ldarg.0      
+  call         token(0x0600004E) ; CheckMovable
+  dup          
+  ldfld        token(0x0A00005D) ; Item1
+  stloc.s      local(0x000D)
+  ldfld        token(0x0A00005E) ; Item2
+  stloc.s      local(0x000E)
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29243
+  pop          
+  br.s         29303
+  ldc.i4.5     
+  newarr       token(0x0100004D) ; System.String
+  dup          
+  ldc.i4.0     
+  ldstr        string token(0x7000241F) ; <tok 1879057439>
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldloca.s     local(0x000D)
+  call         token(0x0A000022) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.2     
+  ldstr        string token(0x700005B1) ; <tok 1879049649>
+  stelem.ref   
+  dup          
+  ldc.i4.3     
+  ldloca.s     local(0x000E)
+  call         token(0x0A000022) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.4     
+  ldstr        string token(0x70002441) ; <tok 1879057473>
+  stelem.ref   
+  call         token(0x0A000023) ; Concat
+  call         token(0x06000099) ; Msg
+  ldloc.s      local(0x000E)
+  ldc.i4.0     
+  ble.s        29365
+  ldloc.s      local(0x000D)
+  brtrue.s     29365
+  ldstr        string token(0x70002449) ; <tok 1879057481>
+  ldloca.s     local(0x000E)
+  call         token(0x0A000022) ; ToString
+  ldstr        string token(0x70002461) ; <tok 1879057505>
+  call         token(0x0A000021) ; Concat
+  ldc.r4       3.0
+  call         token(0x0600004F) ; ShowToast
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29354
+  pop          
+  ret          
+  ldstr        string token(0x70002485) ; <tok 1879057541>
+  call         token(0x06000099) ; Msg
+  ret          
+  ldarg.0      
+  ldarg.1      
+  call         token(0x06000072) ; RunSmartArrange
+  ret          
+  ldarg.1      
+  ldc.i4.4     
+  bge.s        29468
+  ldsfld       token(0x04000028) ; PresetEnabled
+  ldarg.1      
+  ldelem.ref   
+  dup          
+  brtrue.s     29391
+  pop          
+  ldc.i4.1     
+  br.s         29396
+  call         token(0x0A000014) ; get_Value
+  brtrue.s     29468
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29408
+  pop          
+  ret          
+  ldc.i4.5     
+  newarr       token(0x0100004D) ; System.String
+  dup          
+  ldc.i4.0     
+  ldstr        string token(0x700024CB) ; <tok 1879057611>
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldarga.s     argument(0x0001)
+  call         token(0x0A000022) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.2     
+  ldstr        string token(0x700018FD) ; <tok 1879054589>
+  stelem.ref   
+  dup          
+  ldc.i4.3     
+  ldarg.1      
+  call         token(0x06000037) ; NameOf
+  stelem.ref   
+  dup          
+  ldc.i4.4     
+  ldstr        string token(0x700024DD) ; <tok 1879057629>
+  stelem.ref   
+  call         token(0x0A000023) ; Concat
+  call         token(0x06000099) ; Msg
+  ret          
+  ldsfld       token(0x04000029) ; PresetBigFirst
+  ldarg.1      
+  ldelem.ref   
+  dup          
+  brtrue.s     29482
+  pop          
+  ldc.i4.0     
+  br.s         29487
+  call         token(0x0A000014) ; get_Value
+  stloc.s      local(0x0005)
+  ldsfld       token(0x0400002A) ; PresetFromEnd
+  ldarg.1      
+  ldelem.ref   
+  dup          
+  brtrue.s     29503
+  pop          
+  ldc.i4.0     
+  br.s         29508
+  call         token(0x0A000014) ; get_Value
+  stloc.s      local(0x0006)
+  ldloc.3      
+  brfalse      29644
+  ldarg.0      
+  ldloc.s      local(0x0005)
+  ldloc.s      local(0x0006)
+  ldloc.0      
+  ldloc.1      
+  ldloc.2      
+  call         token(0x06000018) ; TrySort
+  stloc.s      local(0x000F)
+  ldloc.s      local(0x000F)
+  ldc.i4.1     
+  bne.un.s     29613
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29546
+  pop          
+  ret          
+  ldc.i4.5     
+  newarr       token(0x0100004D) ; System.String
+  dup          
+  ldc.i4.0     
+  ldstr        string token(0x700024E9) ; <tok 1879057641>
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldsflda      token(0x0400000A) ; LastPinned
+  call         token(0x0A000022) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.2     
+  ldstr        string token(0x70002511) ; <tok 1879057681>
+  stelem.ref   
+  dup          
+  ldc.i4.3     
+  ldsflda      token(0x04000009) ; LastMovable
+  call         token(0x0A000022) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.4     
+  ldstr        string token(0x7000251F) ; <tok 1879057695>
+  stelem.ref   
+  call         token(0x0A000023) ; Concat
+  call         token(0x06000099) ; Msg
+  ret          
+  ldloc.s      local(0x000F)
+  ldc.i4.2     
+  bne.un.s     29634
+  ldstr        string token(0x70002529) ; <tok 1879057705>
+  ldc.r4       4.5
+  call         token(0x0600004F) ; ShowToast
+  ret          
+  ldstr        string token(0x7000257B) ; <tok 1879057787>
+  call         token(0x06000013) ; Debug
+  ldarg.0      
+  call         token(0x0A000108) ; CanSort
+  brtrue.s     29761
+  ldc.i4.0     
+  stloc.s      local(0x0010)
+  ldarg.0      
+  callvirt     token(0x0A000025) ; get_childItems
+  brfalse.s    29679
+  ldarg.0      
+  callvirt     token(0x0A000025) ; get_childItems
+  callvirt     token(0x0A000026) ; get_Count
+  ldc.i4.0     
+  cgt          
+  br.s         29680
+  ldc.i4.0     
+  stloc.s      local(0x0010)
+  leave.s      29687
+  pop          
+  leave.s      29687
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29698
+  pop          
+  br.s         29734
+  ldstr        string token(0x700025BD) ; <tok 1879057853>
+  ldloc.s      local(0x0010)
+  brtrue.s     29714
+  ldstr        string token(0x70002197) ; <tok 1879056791>
+  br.s         29719
+  ldstr        string token(0x7000219B) ; <tok 1879056795>
+  ldstr        string token(0x7000194D) ; <tok 1879054669>
+  call         token(0x0A000021) ; Concat
+  call         token(0x06000099) ; Msg
+  ldloc.s      local(0x0010)
+  brtrue.s     29745
+  ldstr        string token(0x700021A1) ; <tok 1879056801>
+  br.s         29750
+  ldstr        string token(0x700021C5) ; <tok 1879056837>
+  ldc.r4       4.0
+  call         token(0x0600004F) ; ShowToast
+  ret          
+  ldarg.0      
+  ldloc.s      local(0x0005)
+  ldloc.s      local(0x0006)
+  call         token(0x0A00010A) ; Sort
+  stloc.s      local(0x0007)
+  call         token(0x06000006) ; get_Log
+  dup          
+  brtrue.s     29783
+  pop          
+  ret          
+  ldc.i4.8     
+  newarr       token(0x0100004D) ; System.String
+  dup          
+  ldc.i4.0     
+  ldstr        string token(0x7000260D) ; <tok 1879057933>
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldarg.1      
+  call         token(0x06000037) ; NameOf
+  stelem.ref   
+  dup          
+  ldc.i4.2     
+  ldstr        string token(0x70002621) ; <tok 1879057953>
+  stelem.ref   
+  dup          
+  ldc.i4.3     
+  ldloca.s     local(0x0005)
+  call         token(0x0A000109) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.4     
+  ldstr        string token(0x7000262F) ; <tok 1879057967>
+  stelem.ref   
+  dup          
+  ldc.i4.5     
+  ldloca.s     local(0x0006)
+  call         token(0x0A000109) ; ToString
+  stelem.ref   
+  dup          
+  ldc.i4.6     
+  ldstr        string token(0x70002221) ; <tok 1879056929>
+  stelem.ref   
+  dup          
+  ldc.i4.7     
+  ldloca.s     local(0x0007)
+  call         token(0x0A000109) ; ToString
+  stelem.ref   
+  call         token(0x0A000023) ; Concat
+  call         token(0x06000099) ; Msg
+  ret          
+

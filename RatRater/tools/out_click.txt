@@ -1,0 +1,85 @@
+﻿=== TYPE: .ItemMouseDoubleClickHandler
+METHOD: ClickAction
+  ldarg.1      
+  brtrue.s     1598540
+  ret          
+  ldarg.3      
+  brfalse.s    1598626
+  ldarg.1      
+  callvirt     token(0x0600302D) ; get_contentWindow
+  brfalse.s    1598618
+  ldarg.1      
+  callvirt     token(0x0600302D) ; get_contentWindow
+  callvirt     token(0x0600366F) ; IsVisible
+  brfalse.s    1598608
+  ldarg.1      
+  ldc.i4.0     
+  callvirt     token(0x060030E1) ; CloseContentWindow
+  call         token(0x06002B6C) ; get_Instance
+  ldc.i4.2     
+  newarr       token(0x01000146) ; System.String
+  dup          
+  ldc.i4.0     
+  ldarg.1      
+  callvirt     token(0x06003049) ; get_soundContainerClose
+  stelem.ref   
+  dup          
+  ldc.i4.1     
+  ldarg.1      
+  callvirt     token(0x06003047) ; get_soundContainerOpen
+  stelem.ref   
+  callvirt     token(0x06002B6A) ; TryPlayOne
+  pop          
+  br.s         1598626
+  ldarg.0      
+  ldarg.1      
+  ldarg.2      
+  call         token(0x06003743) ; OpenContentAction
+  br.s         1598626
+  ldarg.0      
+  ldarg.1      
+  ldarg.2      
+  call         token(0x06003744) ; OpenExamineAction
+  ldarg.s      argument(0x0004)
+  brfalse.s    1598653
+  ldarg.1      
+  callvirt     token(0x06003087) ; MayActivateSlotItem
+  brfalse.s    1598653
+  ldarg.1      
+  callvirt     token(0x06003088) ; CanActivateSlotItem
+  brfalse.s    1598653
+  ldarg.1      
+  callvirt     token(0x06003089) ; ActivateSlotItem
+  ret          
+  ldarg.3      
+  brtrue.s     1598657
+  ret          
+  ldarg.1      
+  callvirt     token(0x0600308A) ; MaySelectSlotItem
+  brfalse.s    1598701
+  ldarg.1      
+  callvirt     token(0x0600308B) ; CanSelectSlotItem
+  brfalse.s    1598701
+  ldarg.1      
+  callvirt     token(0x06003087) ; MayActivateSlotItem
+  brtrue.s     1598701
+  ldarg.1      
+  callvirt     token(0x0600302D) ; get_contentWindow
+  brtrue.s     1598701
+  ldsfld       token(0x0400233F) ; current
+  ldarg.1      
+  callvirt     token(0x060037B3) ; TrySelectItem
+  ret          
+  ldarg.1      
+  callvirt     token(0x0600302D) ; get_contentWindow
+  brtrue.s     1598731
+  ldarg.1      
+  callvirt     token(0x06003081) ; MayToggleSlotItem
+  brfalse.s    1598731
+  ldarg.1      
+  callvirt     token(0x06003082) ; CanToggleSlotItem
+  brfalse.s    1598731
+  ldarg.1      
+  callvirt     token(0x06003083) ; ToggleSlotItem
+  ret          
+
