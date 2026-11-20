@@ -2,7 +2,9 @@
 
 [English](README.md) | **简体中文**
 
-《深空当铺：可能是偷的》（**Probably Stolen**，Steam App 4348910）的原生 C# 模组。打开鼠笼就能一眼看出哪些老鼠该淘汰，不用悬停；整理背包时死老鼠自动排到最后。用的是游戏自带的模组加载器，**不需要 MelonLoader**。
+本仓库还收录了 [WaterAutoLabel](WaterAutoLabel/README.md)，这是配套的模组，能按真实水质自动给水容器贴标签。两个模组都用游戏自带的加载器，**不需要 MelonLoader**。
+
+《深空当铺：可能是偷的》（**Probably Stolen**，Steam App 4348910）的原生 C# 模组。打开鼠笼就能一眼看出哪些老鼠该淘汰，不用悬停；整理背包时死老鼠自动排到最后。
 
 ## 功能
 
@@ -89,6 +91,10 @@ tools/build.ps1        # 用 Roslyn 把 src/*.cs 编译成 build/RatRater.dll
 - `src/HighlightRenderer.cs` —— 高亮渲染
 - `src/SortPatch.cs` —— Harmony patch 游戏排序器，把红老鼠和死老鼠排到最后
 - `src/RatRaterMod.cs` —— 模组入口、ticker、H 开关
+
+## 关于制作方式
+
+功能设计与验收标准由我定义，代码实现与逆向分析在 AI 协助下完成；发布节奏与每个版本的质量由我把控。
 
 ## 许可
 

@@ -14,7 +14,7 @@ A native C# mod for **Probably Stolen** (Steam App 4348910). Water containers di
 
 ## Install
 
-1. Download the latest `WaterAutoLabel` zip from the [Releases](releases) page and unzip it.
+1. Download the latest `WaterAutoLabel` zip from the [Releases](https://github.com/vaxicy/RatRater/releases) page and unzip it.
 2. Copy the `WaterAutoLabel` folder into the game's `Mods` folder (next to `Probably Stolen.exe`).
 3. Start the game, open **Mods** on the main menu, enable **Water Auto Label**, and restart.
 4. Load a save — hover any water container to see its true quality.

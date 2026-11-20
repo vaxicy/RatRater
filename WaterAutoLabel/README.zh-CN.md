@@ -14,7 +14,7 @@
 
 ## 安装
 
-1. 到 [Releases](releases) 页面下载最新版本的 WaterAutoLabel zip 并解压。
+1. 到 [Releases](https://github.com/vaxicy/RatRater/releases) 页面下载最新版本的 WaterAutoLabel zip 并解压。
 2. 把 `WaterAutoLabel` 文件夹复制到游戏的 `Mods` 目录（跟 `Probably Stolen.exe` 同级）。
 3. 启动游戏，主菜单点「模组 / Mods」，启用「水质自动标注」，按提示重启。
 4. 读档后悬停任意水容器，即可看到真实水质。

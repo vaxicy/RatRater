@@ -2,7 +2,9 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
-A native C# mod for **Probably Stolen** (Steam App 4348910, the "Deep Space Pawn Shop" game). Open a rat cage and instantly see which rats are worth culling — no hovering needed. When you tidy an inventory, rats marked for culling and dead rats sort to the end so you can drag them away in one go. Uses the game's built-in mod loader; **MelonLoader is not required**.
+This repository also hosts [WaterAutoLabel](WaterAutoLabel/README.md), a companion mod that auto-labels water containers with their true quality. Both use the game's built-in mod loader; **MelonLoader is not required**.
+
+A native C# mod for **Probably Stolen** (Steam App 4348910, the "Deep Space Pawn Shop" game). Open a rat cage and instantly see which rats are worth culling — no hovering needed. When you tidy an inventory, rats marked for culling and dead rats sort to the end so you can drag them away in one go.
 
 ## Features
 
@@ -89,6 +91,10 @@ tools/build.ps1        # compile src/*.cs into build/RatRater.dll with Roslyn
 - `src/HighlightRenderer.cs` — highlight overlay rendering
 - `src/SortPatch.cs` — Harmony patch on the game's sort comparator to sink cull/dead rats
 - `src/RatRaterMod.cs` — mod entry, ticker, H toggle
+
+## A note on process
+
+The feature design and acceptance criteria are mine; the implementation and the reverse-engineering legwork were done with AI assistance. The release cadence and the quality bar for every version stay under my control.
 
 ## License
 
