@@ -1,12 +1,12 @@
-# 打包临时目录与探针产物
-RatRater/stage/
-RatRater/build/probe*.dll
+# 打包临时目录与探针产物（所有项目通用）
+**/stage/
+**/build/probe*.dll
 
 # 反编译中间分析产物（可用 tools 下脚本重新生成）
-RatRater/tools/out_*.txt
+**/tools/out_*.txt
 
 # 素材源图副本（compose.py 会自动重新复制）
-RatRater/store-assets/src/
+**/store-assets/src/
 
 # Python 缓存
 __pycache__/

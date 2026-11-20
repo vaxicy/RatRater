@@ -1,7 +1,0 @@
-﻿=== ItemConditionList.CreatePureWater ===
-=== ItemConditionList.CreateBaseWater ===
-=== ItemConditionList.CreateLabPure ===
-=== ItemConditionList.CreatePharmaGrade ===
-=== ItemConditionList.CreateRustWater ===
-=== ItemConditionList.CreateGhostWater ===
-=== ItemConditionList.CreateGutterflow ===
